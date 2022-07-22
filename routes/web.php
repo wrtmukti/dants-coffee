@@ -2,6 +2,9 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\StockController;
+use App\Http\Controllers\TransactionController;
+use App\Http\Controllers\OrderController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -21,13 +24,13 @@ Route::prefix('admin')->group(function () {
     Route::get('/order/online/{id}', [App\Http\Controllers\OrderController::class, 'onlineShow']);
     Route::get('/order/manual', [App\Http\Controllers\OrderController::class, 'manual']);
     Route::get('/order/manual/{id}', [App\Http\Controllers\OrderController::class, 'manualShow']);
-    Route::resource('/order', 'App\Http\Controllers\OrderController');
+    Route::resource('order', OrderController::class);
     Route::post('/transaction/payment/', [App\Http\Controllers\TransactionController::class, 'payment']);
     Route::get('/transaction/invoice/online/{id}', [App\Http\Controllers\TransactionController::class, 'invoiceOnline']);
     Route::get('/transaction/invoice/manual/{id}', [App\Http\Controllers\TransactionController::class, 'invoiceManual']);
     Route::get('/transaction/summary/{id}', [App\Http\Controllers\TransactionController::class, 'summary']);
     Route::get('/transaction/summary/show/{date}', [App\Http\Controllers\TransactionController::class, 'summaryShow']);
-    Route::resource('/transaction', 'App\Http\Controllers\TransactionController');
+    Route::resource('transaction', TransactionController::class);
 
     Route::post('/product/category', [App\Http\Controllers\ProductController::class, 'categoryChoose']);
     Route::post('/product/category/create', [App\Http\Controllers\ProductController::class, 'categoryCreate']);
@@ -36,9 +39,8 @@ Route::prefix('admin')->group(function () {
     Route::get('/product/food', [App\Http\Controllers\ProductController::class, 'food']);
     Route::get('/product/drink', [App\Http\Controllers\ProductController::class, 'drink']);
     Route::resource('/product', 'App\Http\Controllers\ProductController');
-    Route::resource('/stock', 'App\Http\Controllers\StockController');
+    Route::resource('stock', StockController::class);
     Route::prefix('operator')->middleware('operator')->group(function () {
-        Route::resource('/outlet', 'App\Http\Controllers\OutletController');
         Route::get('/report/{id}', [App\Http\Controllers\ReportController::class, 'sale']);
         Route::get('/report/sale/{date}', [App\Http\Controllers\ReportController::class, 'saleShow']);
         Route::get('/customer', [App\Http\Controllers\ReportController::class, 'customer']);
