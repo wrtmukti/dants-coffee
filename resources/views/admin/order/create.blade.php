@@ -23,7 +23,7 @@
           <h5 class="modal-title" id="exampleModalLabel">Keranjang Saya</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <form action="/admin/order/" method="post">
+        <form action="/admin/order" method="post">
           @csrf
           <input name="status" class="form-control" type="hidden" value="1" readonly="readonly">
           <input name="type" class="form-control" type="hidden" value="1" readonly="readonly">
