@@ -2,9 +2,6 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\StockController;
-use App\Http\Controllers\TransactionController;
-use App\Http\Controllers\OrderController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -20,26 +17,38 @@ Auth::routes();
 
 Route::prefix('admin')->group(function () {
     Route::get('/', [App\Http\Controllers\AdminController::class, 'index']);
+
     Route::get('/order/online', [App\Http\Controllers\OrderController::class, 'online']);
-    Route::get('/order/online/{id}', [App\Http\Controllers\OrderController::class, 'onlineShow']);
     Route::get('/order/manual', [App\Http\Controllers\OrderController::class, 'manual']);
+    Route::get('/order/online/{id}', [App\Http\Controllers\OrderController::class, 'onlineShow']);
     Route::get('/order/manual/{id}', [App\Http\Controllers\OrderController::class, 'manualShow']);
-    Route::resource('order', OrderController::class);
+    Route::get('/order/create', [App\Http\Controllers\OrderController::class, 'create']);
+    Route::post('/order', [App\Http\Controllers\OrderController::class, 'store']);
+    Route::patch('/order/{id}', [App\Http\Controllers\OrderController::class, 'update']);
+
+    Route::get('/transaction', [App\Http\Controllers\TransactionController::class, 'index']);
     Route::post('/transaction/payment/', [App\Http\Controllers\TransactionController::class, 'payment']);
     Route::get('/transaction/invoice/online/{id}', [App\Http\Controllers\TransactionController::class, 'invoiceOnline']);
     Route::get('/transaction/invoice/manual/{id}', [App\Http\Controllers\TransactionController::class, 'invoiceManual']);
     Route::get('/transaction/summary/{id}', [App\Http\Controllers\TransactionController::class, 'summary']);
     Route::get('/transaction/summary/show/{date}', [App\Http\Controllers\TransactionController::class, 'summaryShow']);
-    Route::resource('transaction', TransactionController::class);
+    Route::get('/transaction/create', [App\Http\Controllers\TransactionController::class, 'create']);
+    Route::post('/transaction', [App\Http\Controllers\TransactionController::class, 'store']);
+    Route::get('/transaction/{id}', [App\Http\Controllers\TransactionController::class, 'show']);
 
-    Route::post('/product/category', [App\Http\Controllers\ProductController::class, 'categoryChoose']);
-    Route::post('/product/category/create', [App\Http\Controllers\ProductController::class, 'categoryCreate']);
-    Route::post('/product/category/store', [App\Http\Controllers\ProductController::class, 'categoryStore']);
-    Route::post('/product/create', [App\Http\Controllers\ProductController::class, 'create']);
     Route::get('/product/food', [App\Http\Controllers\ProductController::class, 'food']);
     Route::get('/product/drink', [App\Http\Controllers\ProductController::class, 'drink']);
-    Route::resource('/product', 'App\Http\Controllers\ProductController');
-    Route::resource('stock', StockController::class);
+    Route::post('/product/category/create', [App\Http\Controllers\ProductController::class, 'categoryCreate']);
+    Route::post('/product/category', [App\Http\Controllers\ProductController::class, 'categoryChoose']);
+    Route::post('/product/category/store', [App\Http\Controllers\ProductController::class, 'categoryStore']);
+    Route::post('/product/create', [App\Http\Controllers\ProductController::class, 'create']);
+    Route::post('/product', [App\Http\Controllers\ProductController::class, 'store']);
+    Route::delete('/product/{id}', [App\Http\Controllers\ProductController::class, 'store']);
+
+    Route::get('/stock', [App\Http\Controllers\StockController::class, 'index']);
+    Route::get('/stock/create', [App\Http\Controllers\StockController::class, 'create']);
+    Route::post('/stock', [App\Http\Controllers\StockController::class, 'store']);
+
     Route::prefix('operator')->middleware('operator')->group(function () {
         Route::get('/report/{id}', [App\Http\Controllers\ReportController::class, 'sale']);
         Route::get('/report/sale/{date}', [App\Http\Controllers\ReportController::class, 'saleShow']);

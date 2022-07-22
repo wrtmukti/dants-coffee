@@ -25,6 +25,25 @@ class OrderController extends Controller
         return view('admin.order.manual', compact('orders'));
     }
 
+    public function onlineShow($id)
+    {
+        $orders = Order::where('customer_id', $id)->where('status', '!=', 4)->get();
+        $customer = Customer::where('id', $id)->first();
+        if ($orders->where('status', 3)->count() < 1) {
+            return view('admin.order.onlineShow', compact('orders', 'customer'));
+        } else {
+            $transaction = Order::where('customer_id', $id)->where('status', 3)->first();
+            $transaction_id = $transaction->transaction_id;
+            return view('admin.order.onlineShow', compact('orders', 'customer', 'transaction_id'));
+        }
+    }
+
+    public function manualShow($id)
+    {
+        $order = Order::where('id', $id)->first();
+
+        return view('admin.order.manualShow', compact('order'));
+    }
 
     public function create()
     {
@@ -32,8 +51,6 @@ class OrderController extends Controller
         $products = Product::with('stocks')->orderBy('name', 'desc')->get();
         return view('admin.order.create', compact('products', 'categories'));
     }
-
-
     public function store(Request $request)
     {
         // dd($request->all());
@@ -58,25 +75,6 @@ class OrderController extends Controller
         }
 
         return redirect()->to('admin/order/manual/');
-    }
-
-    public function manualShow($id)
-    {
-        $order = Order::where('id', $id)->first();
-
-        return view('admin.order.manualShow', compact('order'));
-    }
-    public function onlineShow($id)
-    {
-        $orders = Order::where('customer_id', $id)->where('status', '!=', 4)->get();
-        $customer = Customer::where('id', $id)->first();
-        if ($orders->where('status', 3)->count() < 1) {
-            return view('admin.order.onlineShow', compact('orders', 'customer'));
-        } else {
-            $transaction = Order::where('customer_id', $id)->where('status', 3)->first();
-            $transaction_id = $transaction->transaction_id;
-            return view('admin.order.onlineShow', compact('orders', 'customer', 'transaction_id'));
-        }
     }
 
     public function edit($id)
