@@ -183,7 +183,7 @@
               @foreach ($orders as $order)
               <?php $total += $order->price ?>
               @endforeach
-              <form action="/admin/transaction/payment/" method="post">
+              <form action="/admin/transaction/payment" method="post">
                 @csrf
                 <div class="modal-body">
                   <input type="hidden" name="order_type" value="0">
