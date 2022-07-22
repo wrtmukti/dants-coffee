@@ -9,7 +9,7 @@
 <div class="card shadow p-5">
   <div class="row justify-content-center">
     <div class="col-md-8">
-      <form action="/admin/transaction/" method="POST">
+      <form action="/admin/transaction" method="POST">
         @csrf
         <div class="form-group">
           <label for="payment_status">Tipe Transaksi</label>
