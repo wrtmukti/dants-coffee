@@ -25,7 +25,7 @@ Route::prefix('admin')->group(function () {
     Route::patch('/order/{id}', [App\Http\Controllers\OrderController::class, 'update']);
 
     Route::get('/transaction', [App\Http\Controllers\TransactionController::class, 'index']);
-    Route::post('/transaction/payment/', [App\Http\Controllers\TransactionController::class, 'payment']);
+    Route::post('/transaction/payment', [App\Http\Controllers\TransactionController::class, 'payment']);
     Route::get('/transaction/invoice/online/{id}', [App\Http\Controllers\TransactionController::class, 'invoiceOnline']);
     Route::get('/transaction/invoice/manual/{id}', [App\Http\Controllers\TransactionController::class, 'invoiceManual']);
     Route::get('/transaction/summary/{id}', [App\Http\Controllers\TransactionController::class, 'summary']);
