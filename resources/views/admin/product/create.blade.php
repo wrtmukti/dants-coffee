@@ -10,7 +10,7 @@
 <div class="card shadow p-5">
   <div class="row justify-content-center">
     <div class="col-md-8">
-      <form action="/admin/product/" method="POST" enctype="multipart/form-data">
+      <form action="/admin/product" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="form-group">
           {{-- <label for="type">Tipe Produk</label> --}}
