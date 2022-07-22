@@ -1,0 +1,44 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\Customer;
+use App\Models\Order;
+use App\Models\Product;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+
+class ReportController extends Controller
+{
+    public function sale($id)
+    {
+        if ($id == 0) {
+            $products = Product::with('orders')->get()->groupBy(function ($item) {
+                return $item->created_at->format('d-m-Y');
+            });;
+        } else {
+            $products = Product::with('orders')->get()->groupBy(function ($item) {
+                return $item->created_at->format('m-Y');
+            });;
+        }
+
+        // dd($products);
+        return view('admin.operator.report.sale', compact('products'));
+    }
+
+    public function saleShow($date)
+    {
+        if (strlen($date) > 7) {
+            $products = Product::with('orders')->where(DB::raw("( to_char(created_at,'dd-mm-YYYY'))"), '=', $date)->orderBy('created_at',  'desc')->get();
+        } else {
+            $products = Product::with('orders')->where(DB::raw("( to_char(created_at,'mm-YYYY'))"), '=', $date)->orderBy('created_at',  'desc')->get();
+        }
+        return view('admin.operator.report.saleShow', compact('products', 'date'));
+    }
+
+    public function customer()
+    {
+        $customers = Customer::where('whatsapp', '!=', null)->orderBy('created_at', 'desc')->get();
+        return view('admin.operator.report.customer', compact('customers'));
+    }
+}
