@@ -73,9 +73,9 @@ class TransactionController extends Controller
     public function summaryShow($date)
     {
         if (strlen($date) > 7) {
-            $transactions = Transaction::where(DB::raw("( to_char(created_at,'dd-mm-YYYY'))"), '=', $date)->orderBy('created_at',  'asc')->get();
+            $transactions = Transaction::where(DB::raw("( date_format(created_at,'%d-%m-%Y'))"), '=', $date)->orderBy('created_at',  'asc')->get();
         } else {
-            $transactions = Transaction::where(DB::raw("( to_char(created_at,'mm-YYYY'))"), '=', $date)->orderBy('created_at',  'asc')->get();
+            $transactions = Transaction::where(DB::raw("( date_format(created_at,'%m-%Y'))"), '=', $date)->orderBy('created_at',  'asc')->get();
         }
 
         return view('admin.transaction.summaryShow', compact('transactions', 'date'));
