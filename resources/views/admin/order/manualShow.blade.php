@@ -88,7 +88,7 @@
           @if ($order->status < 2)
             <p>Ordernya yang belum selesai ajg :(</p>
           @else
-            <form action="/admin/transaction/payment/" method="post">
+            <form action="/admin/transaction/payment" method="post">
               @csrf
               <div class="modal-body">
                 <input type="hidden" name="order_type" value="1">
