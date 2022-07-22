@@ -3,9 +3,7 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
 Route::get('/', [App\Http\Controllers\GuestController::class, 'index']);
 Route::post('/order/store', [App\Http\Controllers\GuestController::class, 'store']);
 Route::get('/order/status', [App\Http\Controllers\GuestController::class, 'status']);
