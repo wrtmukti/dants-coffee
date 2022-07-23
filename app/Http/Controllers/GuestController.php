@@ -26,7 +26,7 @@ class GuestController extends Controller
     public function search(Request $request)
     {
         $search = $request->search;
-        $products = Product::where('name', 'ilike', "%" . $search . "%")->get();
+        $products = Product::where('LOWER(name)', 'LIKE', '%' . strtolower($search) . '%')->get();
         return view('search', compact('products', 'search'));
     }
 

@@ -8,7 +8,7 @@
     <div class="card">
       <div class="card-body">
         <div class="table-responsive">
-          <table class="table table-hover" id="saleTable">
+          <table class="table table-hover">
             <thead>
               <tr>
                 <th class="text-center"><h5 class=" fw-bold">ORDER</h5></th>

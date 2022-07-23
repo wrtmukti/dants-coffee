@@ -5,7 +5,7 @@
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>Papaji</title>
+  <title>Admin Kedai Papaji</title>
 
 
   <!-- plugins:css -->
@@ -65,7 +65,7 @@
         </div>
         <div>
           <a class="navbar-brand" href="/admin">
-            <img src="{{ asset('images/website/logo.jpg') }}" alt="" width="150%">
+            <img src="{{ asset('images/website/nobglogo1.png') }}" alt="" width="150%">
           </a>
         </div>
       </div>
