@@ -10,7 +10,12 @@
 
 @foreach ($orders as $order)
   <div class="row mt-3">
-    <h5>Pesanan ke-{{ $loop->iteration }}</h5>
+    <div class="col">
+      <h5>Pesanan ke-{{ $loop->iteration }}</h5>
+    </div>
+    <div class="col">
+      <p class="text-sucess">*{{ $order->created_at->diffForHumans(); }}</p>
+    </div>
   </div>
   <div class="row ">
     <div class="card ">

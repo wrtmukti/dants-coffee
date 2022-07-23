@@ -8,7 +8,7 @@
     <div class="card">
       <div class="card-body">
         <div class="table-responsive">
-          <table class="table table-hover" id="saleTable">
+          <table class="table table-hover">
             <thead>
               <tr>
                 <th class="text-center"><h5 class=" fw-bold">ORDER</h5></th>
@@ -22,10 +22,10 @@
                       <div class="row">
                         <div class="">
                           <a href="/admin/order/manual/{{ $data->id }}"  class="badge badge-success nav-link fw-bold">Manual</a>
+                          <a href="/admin/order/{{ $data->id }}" class="nav-link text-dark">{{ $data->created_at->diffForHumans(); }}</a>
                         </div>
                       </div>
                       {{-- <div class="row">
-                        <a href="/admin/order/{{ $data->id }}" class="nav-link text-dark">{{ $data->updated_at->format("D m 20y") }}</a>
                         <a href="/admin/order/{{ $data->id }}" class="nav-link text-dark">{{ $data->updated_at->format("H:i") }}</a>
                       </div> --}}
                     </td>     
