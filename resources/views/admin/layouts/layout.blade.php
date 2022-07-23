@@ -29,7 +29,7 @@
   <!-- inject:css -->
   <link rel="stylesheet" href="{{ asset('vendor/star-admin/template/css/vertical-layout-light/style.css') }}">
   <!-- endinject -->
-  <link rel="shortcut icon" href="{{ asset('vendor/star-admin/template/images/favicon.png') }}" />
+  <link rel="shortcut icon" href="{{ asset('images/website/nobglogo2.png') }}" />
 </head>
 <body>
   

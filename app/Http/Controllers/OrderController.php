@@ -16,7 +16,7 @@ class OrderController extends Controller
 
     public function online()
     {
-        $orders = Order::where('customer_id', '>', 0)->orderBy('created_at', 'desc')->get()->groupBy('customer_id');
+        $orders = Order::where('customer_id', '>', 0)->orderBy('created_at', 'desc')->where('status', '!=', 4)->get()->groupBy('customer_id');
         return view('admin.order.online', compact('orders'));
     }
     public function manual()
@@ -125,6 +125,10 @@ class OrderController extends Controller
             default:
                 # code...
                 break;
+        }
+
+        if ($request->status == 4) {
+            return redirect()->to('admin/order/');
         }
         $order = Order::findOrFail($id);
         if ($order->customer_id === null) {
