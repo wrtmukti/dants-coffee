@@ -104,9 +104,16 @@
                         <div class="single-product">
                           <div class="product-image">
                               <img src="{{ asset('images/product/' .  $data->image ) }}" alt="#">
+                              @if ($data->status == 0)
                               <div class="button">
-                                  <button class="btn addToCart" data-product-id="{{ $data->id }}"><i class="lni lni-cart"></i> Add to Cart</button>
+                                <button class="btn addToCart" data-product-id="{{ $data->id }}"><i class="lni lni-cart"></i> Add to Cart</button>
                               </div>
+                              @else
+                              <div class="button">
+                                <button class="btn btn-dark" >Kosong</button>
+                              </div>
+                              @endif
+                              
                           </div>
                           <div class="product-info">
                             @if ($data->type == 0)

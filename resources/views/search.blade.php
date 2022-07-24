@@ -24,9 +24,15 @@
               <div class="single-product">
                 <div class="product-image">
                     <img src="{{ asset('images/product/' . $data->image) }}" class="imgProduct" alt="#">
+                    @if ($data->status == 0)
                     <div class="button">
-                        <button class="btn addToCart" data-product-id="{{ $data->id }}">+<i class="lni lni-cart"></i></button>
+                      <button class="btn addToCart" data-product-id="{{ $data->id }}">+<i class="lni lni-cart"></i></button>
                     </div>
+                    @else    
+                    <div class="button">
+                        <button class="btn btn-dark" >Kosong</button>
+                    </div>
+                    @endif
                 </div>
                 <div class="product-info">
                   <span class="category">{{ $data->category->category_name }}</span>
@@ -77,7 +83,15 @@
                         @endforeach
                       </p>
                       <div class="row mt-4 p-2">
-                        <button id="buttonAdd" class="btn addToCart btn-primary " data-product-id="{{ $data->id }}">+<i class="lni lni-cart"></i></button>
+                        @if ($data->status == 0)
+                        <div class="button">
+                          <button class="btn addToCart" data-product-id="{{ $data->id }}"><i class="lni lni-cart"></i> Add to Cart</button>
+                        </div>
+                        @else
+                        <div class="button">
+                          <button class="btn btn-dark" >Kosong</button>
+                        </div>
+                        @endif
                       </div>
                       
                   </div>

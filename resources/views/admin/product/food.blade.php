@@ -94,7 +94,7 @@
                             </button> 
                           @else
                           <input type="hidden" name="status" value="0">
-                          <button type="sumbit" class="btn btn-secondary text-center  btn-ico" onclick="return confirm('Yakin ingin mengaktifkan produk?');">
+                          <button type="sumbit" class="btn btn-dark text-center  btn-ico" onclick="return confirm('Yakin ingin mengaktifkan produk?');">
                             Nonaktif</i>
                           </button> 
                           @endif
