@@ -36,6 +36,7 @@ Route::prefix('admin')->group(function () {
 
     Route::get('/product/food', [App\Http\Controllers\ProductController::class, 'food']);
     Route::get('/product/drink', [App\Http\Controllers\ProductController::class, 'drink']);
+    Route::put('/product/active/{id}', [App\Http\Controllers\ProductController::class, 'active']);
     Route::post('/product/category/create', [App\Http\Controllers\ProductController::class, 'categoryCreate']);
     Route::post('/product/category', [App\Http\Controllers\ProductController::class, 'categoryChoose']);
     Route::post('/product/category/store', [App\Http\Controllers\ProductController::class, 'categoryStore']);

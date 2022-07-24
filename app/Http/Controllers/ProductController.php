@@ -29,6 +29,14 @@ class ProductController extends Controller
         return view('admin.product.drink', compact('categories', 'products'));
     }
 
+    public function active(Request $request, $id)
+    {
+        $product = Product::find($id);
+        $product->active = $request->active;
+        $product->save();
+        return redirect()->back();
+    }
+
 
     public function categoryCreate(Request $request)
     {

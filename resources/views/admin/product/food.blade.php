@@ -84,7 +84,22 @@
                         </form> 
                       </div>
                       <div class="col-6">
-                        <button class="btn btn-primary">aktif</button>
+                        <form action="/admin/product/active/{{$data->id}}" method="post" style="text-decoration: none">
+                          @csrf
+                          @method('PUT')
+                          @if ($data->status == 0)
+                            <input type="hidden" name="status" value="1">
+                            <button type="sumbit" class="btn btn-success text-center  btn-ico" onclick="return confirm('Yakin ingin menonaktifkan produk?');">
+                              Aktif</i>
+                            </button> 
+                          @else
+                          <input type="hidden" name="status" value="1">
+                          <button type="sumbit" class="btn btn-secondary text-center  btn-ico" onclick="return confirm('Yakin ingin mengaktifkan produk?');">
+                            Nonaktif</i>
+                          </button> 
+                          @endif
+                          
+                        </form> 
                       </div>
                     </div>
                     
