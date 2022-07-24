@@ -84,7 +84,7 @@
                         </form> 
                       </div>
                       <div class="col-6">
-                        <form action="/admin/product/active/{{$data->id}}" method="post" style="text-decoration: none">
+                        <form action="/admin/product/active/{{$data->id}}" method="POST" style="text-decoration: none">
                           @csrf
                           @method('PUT')
                           @if ($data->status == 0)
