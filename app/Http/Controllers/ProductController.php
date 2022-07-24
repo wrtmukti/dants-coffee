@@ -32,7 +32,7 @@ class ProductController extends Controller
     public function active(Request $request, $id)
     {
         $product = Product::find($id);
-        $product->active = $request->active;
+        $product->status = $request->active;
         $product->save();
         return redirect()->back();
     }

@@ -92,7 +92,7 @@
                               Aktif</i>
                             </button> 
                           @else
-                          <input type="hidden" name="status" value="1">
+                          <input type="hidden" name="status" value="0">
                           <button type="sumbit" class="btn btn-secondary text-center  btn-ico" onclick="return confirm('Yakin ingin mengaktifkan produk?');">
                             Nonaktif</i>
                           </button> 
