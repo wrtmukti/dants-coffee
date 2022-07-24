@@ -81,7 +81,7 @@
                         @if ($data->status == 0)
                         <button id="buttonAdd" class="btn addToCart btn-primary " data-product-id="{{ $data->id }}">+<i class="lni lni-cart"></i></button>                       
                         @else
-                        <button class="btn btn-outline-danger rounded-pill" >Kosong :(</button>
+                        <button class="btn btn-outline-danger rounded-pill" ><p>yah, habis :(</p> </button>
                         @endif
                       </div>
                       
