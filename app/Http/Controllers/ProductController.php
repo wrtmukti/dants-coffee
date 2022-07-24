@@ -31,9 +31,7 @@ class ProductController extends Controller
 
     public function active(Request $request, $id)
     {
-        $product = Product::find($id);
-        $product->status = $request->active;
-        $product->save();
+        $product = Product::find($id)->update(['active' => $request->status]);
         return redirect()->back();
     }
 
