@@ -13,11 +13,11 @@ class ReportController extends Controller
     public function sale($id)
     {
         if ($id == 0) {
-            $products = Product::with('orders')->get()->groupBy(function ($item) {
+            $products = Product::whereHas('orders')->get()->groupBy(function ($item) {
                 return $item->created_at->format('d-m-Y');
             });;
         } else {
-            $products = Product::with('orders')->get()->groupBy(function ($item) {
+            $products = Product::whereHas('orders')->get()->groupBy(function ($item) {
                 return $item->created_at->format('m-Y');
             });;
         }
