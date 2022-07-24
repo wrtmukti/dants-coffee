@@ -89,7 +89,7 @@
                         </div>
                         @else
                         <div class="button">
-                          <button class="btn btn-dark" >Kosong</button>
+                          <button class="btn btn-outline-danger rounded-pill" >Kosong :(</button>
                         </div>
                         @endif
                       </div>
