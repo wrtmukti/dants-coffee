@@ -125,8 +125,8 @@
             <p>Silahkan berkunjung kembali</p>
         </div>
     </div>
+    <script>
+        window.print();
+    </script>
 </body>
 </html>
-<script>
-    window.print();
-</script>
