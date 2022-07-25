@@ -19,6 +19,7 @@ body {
   overflow-x: hidden;
   font-size: 14px;
   width: 100%;
+  padding-right: 0 !important;
 }
 
 p {
