@@ -8,6 +8,7 @@
 
 html {
   scroll-behavior: smooth;
+  width: 100%;
 }
 
 body {
@@ -17,6 +18,7 @@ body {
   color: #888;
   overflow-x: hidden;
   font-size: 14px;
+  
 }
 
 p {
