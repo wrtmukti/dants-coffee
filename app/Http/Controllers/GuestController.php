@@ -40,7 +40,7 @@ class GuestController extends Controller
     public function category($id)
     {
         $category = Category::find($id);
-        $products = Product::with('stocks')->where('category_id', $id)->orderBy('price', 'asc')->paginate(10);
+        $products = Product::with('stocks')->where('category_id', $id)->orderBy('price', 'asc')->get();
         return view('category', compact('products', 'category'));
     }
 
