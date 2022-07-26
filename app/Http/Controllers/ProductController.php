@@ -16,7 +16,7 @@ class ProductController extends Controller
     }
     public function food()
     {
-        $categories = Category::where('category_type', 0)->orderBy('created_at', 'desc')->get();
+        $categories = Category::where('category_type', 0)->orderBy('category_name', 'asc')->get();
         $products = Product::with('stocks')->orderBy('created_at', 'desc')->where('type', 0)->get();
 
         return view('admin.product.food', compact('categories', 'products'));
