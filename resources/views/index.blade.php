@@ -14,7 +14,7 @@
   <section class="hero-area">
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-md-4 col-lg-8">
+            <div class="col-md-4 col-lg-12">
                 <div class="slider-head d-block">
                     <!-- Start Hero Slider -->
                     <div class="hero-slider">
