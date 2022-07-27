@@ -56,7 +56,7 @@
   <div class="wrapper-nav">
     <nav class="nav nav-tabs list mt-2" id="myTab" role="tablist">
       @foreach ($categories as $category)    
-          <a  class=" nav-item nav-link pointer {{ $category->id == 1 ? 'active' : '' }}" data-bs-toggle="tab" data-bs-target="#tab{{ $category_id }}" role="tab" aria-controls="public" aria-selected="true">{{ $category->category_name }}</a>
+          <a  class=" nav-item nav-link pointer {{ $category->id == 1 ? 'active' : '' }}" data-bs-toggle="tab" data-bs-target="#tab{{ $category->id }}" role="tab" aria-controls="public" aria-selected="true">{{ $category->category_name }}</a>
       @endforeach
     </nav>
   </div>
