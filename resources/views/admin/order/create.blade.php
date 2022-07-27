@@ -50,21 +50,16 @@
 {{-- product --}}
 
 
-<div class="container p-0">
-  <div class="scroller scroller-left"><i class="  mdi mdi-arrow-left  "></i></div>
-  <div class="scroller scroller-right"><i class="  mdi mdi-arrow-right  "></i></div>
-  <div class="wrapper">
-    <ul class="nav nav-tabs list" id="myTAB">
-      @foreach ($categories as $category)    
-      <li class="nav-item">
-          <a href="#category{{ $category->id }}" class="nav-link {{ $category->id == 1 ? 'active' : '' }}" data-bs-toggle="tab">{{ $category->category_name }}</a>
-      </li>
-      @endforeach
-    </ul>
-  </div>
-  <div class="tab-content">
+  <ul class="nav nav-tabs" role="tablist"  style="display: none" >
     @foreach ($categories as $category)    
-      <div class="tab-pane fade show {{ $category->id == 1 ? 'active' : '' }}" id="category{{ $category->id }}">
+    <li class="nav-item">
+        <a href="#tab{{ $category->id }}" class="nav-link {{ $category->id == 1 ? 'active' : '' }}" role="tab" data-toggle="tab">{{ $category->category_name }}</a>
+    </li>
+    @endforeach
+  </ul>
+  <div class="tab-content" style="display: none">
+    @foreach ($categories as $category)    
+      <div role="tabpanel" class="tab-pane fade show {{ $category->id == 1 ? 'active' : '' }}" id="tab{{ $category->id }}">
         @php
             $product = $products->where('category_id', $category->id)
         @endphp
@@ -111,7 +106,7 @@
       </div>
     @endforeach
   </div>
-</div>
+
  
 
 
