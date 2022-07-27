@@ -168,6 +168,7 @@
             <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">Keranjang Saya</h5>
+                <span class="text-danger">*pastikan order sebelumnya tidak tercantum</span>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <form action="/order/store" method="post">
@@ -185,8 +186,13 @@
                 <div class="modal-footer d-none" id="modal-footer">
                 <input id="total_price" class="form-control text-center mb-4 fw-bold" type="text" value="" readonly="readonly">
                 <div class="row mt-2">
-                    <span class="text-danger">*no meja wajib diisi</span>
-                    <input name="no_table" class="form-control" type="text" required placeholder="nomor meja">
+                <span class="text-danger">*no meja wajib diisi</span>
+                <input name="no_table" class="form-control @error('no_table') is-invalid @enderror" type="text" required placeholder="nomor meja">
+                @error('no_table')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
                 </div>
                 <textarea name="note" class="form-control" type="text"  placeholder="*catatan" ></textarea>
                 
