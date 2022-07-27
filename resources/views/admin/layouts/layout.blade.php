@@ -30,8 +30,6 @@
   <link rel="stylesheet" href="{{ asset('vendor/star-admin/template/css/vertical-layout-light/style.css') }}">
   <!-- endinject -->
   <link rel="shortcut icon" href="{{ asset('images/website/nobglogo2.png') }}" />
-  <link rel="stylesheet" href="node_modules/bootstrap-icons/1.7.2/font/bootstrap-icons.min.css">
-  <link href="node_modules/scrollable-tabs-bootstrap-5/dist/scrollable-tabs.css" rel="stylesheet">
 </head>
 <body>
   
@@ -288,9 +286,7 @@
     <!-- page-body-wrapper ends -->
   </div>
   <!-- container-scroller -->
- {{-- plugin scroll --}}
- <script src="node_modules/move-js/move.min.js"></script>
- <script src="node_modules/scrollable-tabs-bootstrap-5/dist/scrollable-tabs.js"></script>
+ {{-- plugin cart --}}
 
   <!-- plugins:js -->
   <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
@@ -326,7 +322,71 @@
 } );
   </script>
   
-  
+  {{-- tab scroller --}}
+  <script>
+    var hidWidth;
+    var scrollBarWidths = 40;
+
+    var widthOfList = function(){
+    var itemsWidth = 0;
+    $('.list li').each(function(){
+        var itemWidth = $(this).outerWidth();
+        itemsWidth+=itemWidth;
+      });
+      return itemsWidth;
+    };
+
+    var widthOfHidden = function(){
+      return (($('.wrapper').outerWidth())-widthOfList()-getLeftPosi())-scrollBarWidths;
+    };
+
+    var getLeftPosi = function(){
+      return $('.list').position().left;
+    };
+
+    var reAdjust = function(){
+      if (($('.wrapper').outerWidth()) < widthOfList()) {
+        $('.scroller-right').show();
+      }
+      else {
+        $('.scroller-right').hide();
+      }
+      
+      if (getLeftPosi()<0) {
+        $('.scroller-left').show();
+      }
+      else {
+        $('.item').animate({left:"-="+getLeftPosi()+"px"},'slow');
+        $('.scroller-left').hide();
+      }
+    }
+
+    reAdjust();
+
+    $(window).on('resize',function(e){  
+        reAdjust();
+    });
+
+    $('.scroller-right').click(function() {
+      
+      $('.scroller-left').fadeIn('slow');
+      $('.scroller-right').fadeOut('slow');
+      
+      $('.list').animate({left:"+="+widthOfHidden()+"px"},'slow',function(){
+
+      });
+    });
+
+    $('.scroller-left').click(function() {
+      
+      $('.scroller-right').fadeIn('slow');
+      $('.scroller-left').fadeOut('slow');
+      
+        $('.list').animate({left:"-="+getLeftPosi()+"px"},'slow',function(){
+        
+        });
+    });    
+  </script>
 
   {{-- kembalian --}}
   <script>

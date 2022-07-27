@@ -50,19 +50,21 @@
 {{-- product --}}
 
 
-<div class="w-100">
-  <div class="scroller scroller-left float-start mt-2"><i class="  mdi mdi-arrow-left  "></i></div>
-  <div class="scroller scroller-right float-end mt-2"><i class="  mdi mdi-arrow-right  "></i></div>
-  <div class="wrapper-nav" style="z-index: 10000">
-    <nav class="nav nav-tabs list mt-2" id="myTab" role="tablist">
+<div class="container p-0">
+  <div class="scroller scroller-left"><i class="  mdi mdi-arrow-left  "></i></div>
+  <div class="scroller scroller-right"><i class="  mdi mdi-arrow-right  "></i></div>
+  <div class="wrapper">
+    <ul class="nav nav-tabs list" id="myTAB">
       @foreach ($categories as $category)    
-          <a  class=" nav-item nav-link pointer {{ $category->id == 1 ? 'active' : '' }}" data-bs-toggle="tab" data-bs-target="#tab{{ $category->id }}" role="tab" aria-controls="public" aria-selected="true">{{ $category->category_name }}</a>
+      <li class="nav-item">
+          <a href="#category{{ $category->id }}" class="nav-link {{ $category->id == 1 ? 'active' : '' }}" data-bs-toggle="tab">{{ $category->category_name }}</a>
+      </li>
       @endforeach
-    </nav>
+    </ul>
   </div>
-  <div class="tab-content p-3" id="myTabContent">
+  <div class="tab-content">
     @foreach ($categories as $category)    
-      <div class="tab-pane fade show {{ $category->id == 1 ? 'active' : '' }} mt-2" id="tab{{ $category->id }}" role="tabpanel" aria-labelledby="public-tab">
+      <div class="tab-pane fade show {{ $category->id == 1 ? 'active' : '' }}" id="category{{ $category->id }}">
         @php
             $product = $products->where('category_id', $category->id)
         @endphp
