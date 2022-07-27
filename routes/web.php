@@ -13,7 +13,7 @@ Route::post('/search', [App\Http\Controllers\GuestController::class, 'search']);
 
 Auth::routes();
 
-Route::prefix('admin')->group(function () {
+Route::prefix('admin')->middleware('auth')->group(function () {
     Route::get('/', [App\Http\Controllers\AdminController::class, 'index']);
 
     Route::get('/order/online', [App\Http\Controllers\OrderController::class, 'online']);
