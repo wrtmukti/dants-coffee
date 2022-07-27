@@ -30,6 +30,8 @@
   <link rel="stylesheet" href="{{ asset('vendor/star-admin/template/css/vertical-layout-light/style.css') }}">
   <!-- endinject -->
   <link rel="shortcut icon" href="{{ asset('images/website/nobglogo2.png') }}" />
+  <link rel="stylesheet" href="node_modules/bootstrap-icons/1.7.2/font/bootstrap-icons.min.css">
+  <link href="node_modules/scrollable-tabs-bootstrap-5/dist/scrollable-tabs.css" rel="stylesheet">
 </head>
 <body>
   
@@ -286,7 +288,9 @@
     <!-- page-body-wrapper ends -->
   </div>
   <!-- container-scroller -->
- {{-- plugin cart --}}
+ {{-- plugin scroll --}}
+ <script src="node_modules/move-js/move.min.js"></script>
+ <script src="node_modules/scrollable-tabs-bootstrap-5/dist/scrollable-tabs.js"></script>
 
   <!-- plugins:js -->
   <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
