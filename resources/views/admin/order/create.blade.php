@@ -2,7 +2,7 @@
 @section('content')
 
 {{-- cart icon --}}
-<div class="row ">
+<div class="row " style="position: sticky; top: 0; z-index: 100;">
   <div class="col-5 mb-3">
     <!-- Button trigger modal -->
     <div class="shopping-cart">
