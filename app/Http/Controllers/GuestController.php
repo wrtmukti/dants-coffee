@@ -47,7 +47,7 @@ class GuestController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'no_table' => 'required',
+            'no_table' => 'integer|digits_between:1,10',
         ]);
         $customers = Customer::where('no_table', $request->no_table)->whereHas('orders', function ($query) {
             $query->where('status', '<', '3');
