@@ -53,7 +53,7 @@
 <div class="w-100">
   <div class="scroller scroller-left float-start mt-2"><i class="  mdi mdi-arrow-left  "></i></div>
   <div class="scroller scroller-right float-end mt-2"><i class="  mdi mdi-arrow-right  "></i></div>
-  <div class="wrapper-nav">
+  <div class="wrapper-nav" style="z-index: 10000">
     <nav class="nav nav-tabs list mt-2" id="myTab" role="tablist">
       @foreach ($categories as $category)    
           <a  class=" nav-item nav-link pointer {{ $category->id == 1 ? 'active' : '' }}" data-bs-toggle="tab" data-bs-target="#tab{{ $category->id }}" role="tab" aria-controls="public" aria-selected="true">{{ $category->category_name }}</a>
