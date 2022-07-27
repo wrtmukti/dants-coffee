@@ -50,14 +50,14 @@
 {{-- product --}}
 
 
-  <ul class="nav nav-tabs" role="tablist"  style="display: none" >
+  <ul class="nav nav-tabs" role="tablist"   >
     @foreach ($categories as $category)    
     <li class="nav-item">
         <a href="#tab{{ $category->id }}" class="nav-link {{ $category->id == 1 ? 'active' : '' }}" role="tab" data-bs-toggle="tab">{{ $category->category_name }}</a>
     </li>
     @endforeach
   </ul>
-  <div class="tab-content" style="display: none">
+  <div class="tab-content" >
     @foreach ($categories as $category)    
       <div role="tabpanel" class="tab-pane fade show {{ $category->id == 1 ? 'active' : '' }}" id="tab{{ $category->id }}">
         @php
