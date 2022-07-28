@@ -188,8 +188,8 @@
                 @php
                     $tables = App\Models\Table::where('status', 1)->get();
                 @endphp
-                <div class="form-group">
-                    <label for="status">NO MEJA</label>
+                <div class="form-group float-start">
+                    <label for="no_table" class="text-danger">*No Meja</label>
                     <select name="no_table" class="form-control" id="exampleFormControlSelect1" value=" {{ old('no_table') }}">
                         @foreach ($tables as $data)
                         <option value="{{ $data->no_table }}">{{ $data->no_table }}</option>
