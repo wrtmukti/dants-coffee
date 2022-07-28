@@ -14,7 +14,7 @@
         @method('PUT')
         <div class="form-group">
           <label for="exampleInputEmail1">Jumlah yang ditambahkan</label>
-          <input type="number" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Jumlah" name="amount">
+          <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Jumlah" name="amount">
         </div>
         <button type="submit" class="btn btn-primary">Tambah</button>
       </form>

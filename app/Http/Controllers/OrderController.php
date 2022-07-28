@@ -128,7 +128,7 @@ class OrderController extends Controller
         }
 
         if ($request->status == 4) {
-            return redirect()->to('admin/order/');
+            return redirect()->to('admin/order/' . $order->customer_id);
         }
         $order = Order::findOrFail($id);
         if ($order->customer_id === null) {
