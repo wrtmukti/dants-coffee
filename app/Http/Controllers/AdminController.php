@@ -19,7 +19,8 @@ class AdminController extends Controller
     }
     public function table()
     {
-        return view('admin.table');
+        $tables = Table::all();
+        return view('admin.table', compact('tables'));
     }
     public function updateTable(Request $request, $id)
     {
@@ -29,6 +30,6 @@ class AdminController extends Controller
             $table = Table::where('id', $id)->update(['status' => 0]);
         }
 
-        return view('admin.table');
+        return view('admin.table', compact('table'));
     }
 }
