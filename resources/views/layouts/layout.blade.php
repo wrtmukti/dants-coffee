@@ -167,14 +167,10 @@
         <div class="modal-dialog">
             <div class="modal-content">
             <div class="modal-header">
-                <div class="row">
-                    <h5 class="modal-title" id="exampleModalLabel">Keranjang Saya</h5>
-                </div>
-                <div class="row">
-                    <p class="text-danger">*pastikan order sebelumnya tidak tercantum</p>
-                </div>
+                 <h5 class="modal-title" id="exampleModalLabel">Keranjang Saya</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
+            
             <form action="/order/store" method="post">
                 @csrf
                 <input name="status" class="form-control" type="hidden" value="0" readonly="readonly">
@@ -364,6 +360,7 @@
         let result = productsInCart.map(product => {
           return `
             <li class="buyItem mb-3">
+              <p class="text-danger">*pastikan order sebelumnya tidak tercantum</p>
               <div class="row ">
                 <div class="col-5">
                   <img src="${product.image}" class="imgProduct">
