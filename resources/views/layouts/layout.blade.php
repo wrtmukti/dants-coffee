@@ -187,7 +187,7 @@
                 <input id="total_price" class="form-control text-center mb-4 fw-bold" type="text" value="" readonly="readonly">
                 <div class="row mt-2">
                 <span class="text-danger">*no meja wajib diisi</span>
-                <input name="no_table" class="form-control @error('no_table') is-invalid @enderror" type="text" required placeholder="nomor meja">
+                <input name="no_table" class="form-control @error('no_table') is-invalid @enderror" type="number" required placeholder="nomor meja">
                 @error('no_table')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
