@@ -191,6 +191,7 @@
                 <li class="nav-item"> <a class="nav-link" href="/admin/order/create">Buat Pesanan</a></li>
                 <li class="nav-item"> <a class="nav-link" href="/admin/order/manual">Pesanan Manual</a></li>
                 <li class="nav-item"> <a class="nav-link" href="/admin/order/online">Pesanan Online</a></li>
+                <li class="nav-item"> <a class="nav-link" href="/admin/table">Meja</a></li>
               </ul>
             </div>
           </li>

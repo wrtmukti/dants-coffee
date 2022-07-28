@@ -15,6 +15,8 @@ Auth::routes();
 
 Route::prefix('admin')->middleware('auth')->group(function () {
     Route::get('/', [App\Http\Controllers\AdminController::class, 'index']);
+    Route::get('/table', [App\Http\Controllers\AdminController::class, 'table']);
+    Route::put('/table/{id}', [App\Http\Controllers\AdminController::class, 'updateTable']);
 
     Route::get('/order/online', [App\Http\Controllers\OrderController::class, 'online']);
     Route::get('/order/manual', [App\Http\Controllers\OrderController::class, 'manual']);
