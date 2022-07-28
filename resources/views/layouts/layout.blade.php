@@ -191,6 +191,7 @@
                 <div class="form-group float-start">
                     <label for="no_table" class="text-danger">*No Meja</label>
                     <select name="no_table" class="form-control" id="exampleFormControlSelect1" value=" {{ old('no_table') }}">
+                        <option value="">Pilih</option>
                         @foreach ($tables as $data)
                         <option value="{{ $data->no_table }}">{{ $data->no_table }}</option>
                         @endforeach

@@ -47,45 +47,49 @@ class GuestController extends Controller
 
     public function store(Request $request)
     {
-        $table = Table::where('no_table', $request->no_table)->first();
-        if ($table->status == 1) {
-            $customers = Customer::where('no_table', $request->no_table)->whereHas('orders', function ($query) {
-                $query->where('status', '<', '3');
-            })->first();
-            if ($customers !== null) {
-                $customer_id = $customers->id;
+        if ($request->no_table !== null) {
+            $table = Table::where('no_table', $request->no_table)->first();
+            if ($table->status == 1) {
+                $customers = Customer::where('no_table', $request->no_table)->whereHas('orders', function ($query) {
+                    $query->where('status', '<', '3');
+                })->first();
+                if ($customers !== null) {
+                    $customer_id = $customers->id;
+                } else {
+                    $customer = new Customer();
+                    $customer->no_table = $request->no_table;
+                    if ($request->has('customer_name')) {
+                        $customer->name = $request->customer_name;
+                    }
+                    if ($request->has('customer_whatsapp')) {
+                        $customer->whatsapp = $request->customer_whatsapp;
+                    }
+                    $customer->save();
+                    $customer_id = $customer->id;
+                    $products = $request->input('product_id', []);
+                    $amounts = $request->input('amount', []);
+
+                    $order = Order::create([
+                        'status' =>  $request->status,
+                        'price' =>  $request->price,
+                        'type' => $request->type,
+                        'customer_id' => $customer_id,
+                        'note' => $request->note,
+                    ]);
+                    $sync_data = [];
+                    for ($i = 0; $i < count($products); $i++) {
+                        $sync_data[$products[$i]] = ['quantity' => $amounts[$i]];
+                        $order->products()->sync($sync_data);
+                    };
+
+
+                    return redirect()->to('/order/status')->with('success', 'Pesanan Kamu Berhasil Dikirim :)');
+                }
             } else {
-                $customer = new Customer();
-                $customer->no_table = $request->no_table;
-                if ($request->has('customer_name')) {
-                    $customer->name = $request->customer_name;
-                }
-                if ($request->has('customer_whatsapp')) {
-                    $customer->whatsapp = $request->customer_whatsapp;
-                }
-                $customer->save();
-                $customer_id = $customer->id;
-                $products = $request->input('product_id', []);
-                $amounts = $request->input('amount', []);
-
-                $order = Order::create([
-                    'status' =>  $request->status,
-                    'price' =>  $request->price,
-                    'type' => $request->type,
-                    'customer_id' => $customer_id,
-                    'note' => $request->note,
-                ]);
-                $sync_data = [];
-                for ($i = 0; $i < count($products); $i++) {
-                    $sync_data[$products[$i]] = ['quantity' => $amounts[$i]];
-                    $order->products()->sync($sync_data);
-                };
-
-
-                return redirect()->to('/order/status')->with('success', 'Pesanan Kamu Berhasil Dikirim :)');
+                return redirect()->to('/order/status')->with('danger', 'Meja kamu belum aktif, silahkan hubungi kasir!');
             }
         } else {
-            return redirect()->to('/order/status')->with('danger', 'Meja kamu belum aktif, silahkan hubungi kasir!');
+            return redirect()->to('/order/status')->with('danger', 'Maaf Kamu belum mengisi no meja');
         }
     }
 
