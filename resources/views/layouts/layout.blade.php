@@ -185,22 +185,16 @@
                 </div>
                 <div class="modal-footer d-none" id="modal-footer">
                 <input id="total_price" class="form-control text-center mb-4 fw-bold" type="text" value="" readonly="readonly">
-                <div class="row mt-2">
                 @php
                     $tables = App\Models\Table::where('status', 1)->get();
                 @endphp
                 <div class="form-group">
                     <label for="status">NO MEJA</label>
-                    <select name="no_table" class="form-control" id="exampleFormControlSelect1" value=" {{ old('status') }}">
+                    <select name="no_table" class="form-control" id="exampleFormControlSelect1" value=" {{ old('no_table') }}">
                         @foreach ($tables as $data)
                         <option value="{{ $data->no_table }}">{{ $data->no_table }}</option>
                         @endforeach
                     </select>          
-                    @error('status')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
                   </div>
                 </div>
                 <textarea name="note" class="form-control" type="text"  placeholder="*catatan" ></textarea>
