@@ -142,11 +142,11 @@ class TransactionController extends Controller
     public function saleShow($date)
     {
         if (strlen($date) > 7) {
-            $products = Product::whereHas('orders')->where(DB::raw("(DATE_FORMAT(created_at,'%d-%m-%Y'))"), '=', $date)->orderBy('created_at',  'desc')->get();
+            $orders = Order::where(DB::raw("(DATE_FORMAT(created_at,'%d-%m-%Y'))"), '=', $date)->orderBy('created_at',  'desc')->get();
         } else {
-            $products = Product::whereHas('orders')->where(DB::raw("(DATE_FORMAT(created_at,'%m-%Y'))"), '=', $date)->orderBy('created_at',  'desc')->get();
+            $orders = Order::where(DB::raw("(DATE_FORMAT(created_at,'%m-%Y'))"), '=', $date)->orderBy('created_at',  'desc')->get();
         }
-        return view('admin.transaction.saleShow', compact('products', 'date'));
+        return view('admin.transaction.saleShow', compact('orders', 'date'));
     }
 
     /**
