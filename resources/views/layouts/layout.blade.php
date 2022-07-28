@@ -185,6 +185,7 @@
                 </div>
                 <div class="modal-footer d-none" id="modal-footer">
                 <input id="total_price" class="form-control text-center mb-4 fw-bold" type="text" value="" readonly="readonly">
+                <div class="row mt-2">
                 @php
                     $tables = App\Models\Table::where('status', 1)->get();
                 @endphp
