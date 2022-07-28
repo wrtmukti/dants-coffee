@@ -24,9 +24,9 @@
           Kategori
         </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuSizeButton2">
-          <a class="dropdown-item" href="/admin/operator/report/0" class="fw-bold text-center">Harian</a>
+          <a class="dropdown-item" href="/admin/transaction/report/0" class="fw-bold text-center">Harian</a>
           <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="/admin/operator/report/1" class="fw-bold text-center">Bulanan</a>
+          <a class="dropdown-item" href="/admin/transaction/report/1" class="fw-bold text-center">Bulanan</a>
         </div>
       </div>
     </div>
@@ -58,11 +58,11 @@
                   <tr>
                     {{-- <td class="text-center fw-bold "><a href="/admin/order/{{ $data->id }}" class="nav-link text-dark">{{ $loop->iteration }}</a></td> --}}
                     <td class="text-center">
-                      <a href="/admin/operator/report/sale/{{ $date }}" class="nav-link  text-dark">{{ $date }}</a>
+                      <a href="/admin/transaction/report/sale/{{ $date }}" class="nav-link  text-dark">{{ $date }}</a>
                     </td>
                     <td class="text-center">
                      
-                      <a  href="/admin/operator/report/sale/{{ $date }}" class="nav-link  text-dark">{{ $data->count() }} Produk Terjual</a>
+                      <a  href="/admin/transaction/report/sale/{{ $date }}" class="nav-link  text-dark">{{ $data->count() }} Produk Terjual</a>
                     </td>
                   </tr>
                   @endforeach
