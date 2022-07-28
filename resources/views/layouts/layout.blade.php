@@ -360,7 +360,7 @@
         let result = productsInCart.map(product => {
           return `
             <li class="buyItem mb-3">
-              <p class="text-danger">*pastikan order sebelumnya tidak tercantum</p>
+              <p class="text-danger mb-2">*pastikan order sebelumnya tidak tercantum</p>
               <div class="row ">
                 <div class="col-5">
                   <img src="${product.image}" class="imgProduct">
