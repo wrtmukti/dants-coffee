@@ -185,7 +185,6 @@
                 </div>
                 <div class="modal-footer d-none" id="modal-footer">
                 <input id="total_price" class="form-control text-center mb-4 fw-bold" type="text" value="" readonly="readonly">
-                <div class="row mt-2">
                 @php
                     $tables = App\Models\Table::where('status', 1)->get();
                 @endphp
@@ -196,7 +195,6 @@
                         <option value="{{ $data->no_table }}">{{ $data->no_table }}</option>
                         @endforeach
                     </select>          
-                  </div>
                 </div>
                 <textarea name="note" class="form-control" type="text"  placeholder="*catatan" ></textarea>
                 
