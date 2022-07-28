@@ -72,7 +72,8 @@
                     @else
                     <a href="/admin/order/manual/{{ $data->id }}" class="nav-link text-center text-dark">Pesanan Manual</a>
                         
-                    @endif                  </td>
+                    @endif                  
+                  </td>
                   <td>
                     @if ($data->status == 0)
                     <a href="/admin/order/online/{{ $data->id }}" class="nav-link text-center text-dark">Rp. {{ $data->price }},-</a>

@@ -50,9 +50,11 @@ class GuestController extends Controller
         if ($request->no_table !== null) {
             $table = Table::where('no_table', $request->no_table)->first();
             if ($table->status == 1) {
+
                 $customers = Customer::where('no_table', $request->no_table)->whereHas('orders', function ($query) {
                     $query->where('status', '<', '3');
                 })->first();
+
                 if ($customers !== null) {
                     $customer_id = $customers->id;
                 } else {
