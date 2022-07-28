@@ -68,25 +68,24 @@ class GuestController extends Controller
                     }
                     $customer->save();
                     $customer_id = $customer->id;
-                    $products = $request->input('product_id', []);
-                    $amounts = $request->input('amount', []);
-
-                    $order = Order::create([
-                        'status' =>  $request->status,
-                        'price' =>  $request->price,
-                        'type' => $request->type,
-                        'customer_id' => $customer_id,
-                        'note' => $request->note,
-                    ]);
-                    $sync_data = [];
-                    for ($i = 0; $i < count($products); $i++) {
-                        $sync_data[$products[$i]] = ['quantity' => $amounts[$i]];
-                        $order->products()->sync($sync_data);
-                    };
-
-
-                    return redirect()->to('/order/status')->with('success', 'Pesanan Kamu Berhasil Dikirim :)');
                 }
+
+                $products = $request->input('product_id', []);
+                $amounts = $request->input('amount', []);
+
+                $order = Order::create([
+                    'status' =>  $request->status,
+                    'price' =>  $request->price,
+                    'type' => $request->type,
+                    'customer_id' => $customer_id,
+                    'note' => $request->note,
+                ]);
+                $sync_data = [];
+                for ($i = 0; $i < count($products); $i++) {
+                    $sync_data[$products[$i]] = ['quantity' => $amounts[$i]];
+                    $order->products()->sync($sync_data);
+                };
+                return redirect()->to('/order/status')->with('success', 'Pesanan Kamu Berhasil Dikirim :)');
             } else {
                 return redirect()->to('/order/status')->with('danger', 'Meja kamu belum aktif, silahkan hubungi kasir!');
             }
