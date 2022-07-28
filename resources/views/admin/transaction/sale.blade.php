@@ -34,7 +34,7 @@
 
 
 
-  @if ($products->count() == 0)
+  @if ($orders->count() == 0)
     <div class="alert alert-danger text-center">
       Laporan Masih Kosong
     </div>
