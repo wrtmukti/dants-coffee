@@ -191,7 +191,7 @@
                 @endphp
                 <div class="form-group">
                     <label for="status">NO MEJA</label>
-                    <select name="status" class="form-control" id="exampleFormControlSelect1" value=" {{ old('status') }}">
+                    <select name="no_table" class="form-control" id="exampleFormControlSelect1" value=" {{ old('status') }}">
                         @foreach ($tables as $data)
                         <option value="{{ $data->no_table }}">{{ $data->no_table }}</option>
                         @endforeach
