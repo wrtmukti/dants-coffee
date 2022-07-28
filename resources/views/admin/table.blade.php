@@ -25,13 +25,13 @@
                     <form action="/admin/table/{{$data->id}}" method="POST" style="text-decoration: none">
                       @csrf
                       @method('PUT')
-                      @if ($data->status == 0)
-                        <input type="hidden" name="status" value="1">
+                      @if ($data->status == 1)
+                        <input type="hidden" name="status" value="0">
                         <button type="sumbit" class="btn btn-success text-center">
                           Aktif</i>
                         </button> 
                       @else
-                      <input type="hidden" name="status" value="0">
+                      <input type="hidden" name="status" value="1">
                       <button type="sumbit" class="btn btn-dark text-center ">
                         Nonaktif</i>
                       </button> 
