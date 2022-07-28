@@ -53,7 +53,7 @@
                   </tr>
                 </thead>
                 <tbody>
-                  @foreach($products as $date => $data)
+                  @foreach($orders as $date => $data)
                   
                   <tr>
                     {{-- <td class="text-center fw-bold "><a href="/admin/order/{{ $data->id }}" class="nav-link text-dark">{{ $loop->iteration }}</a></td> --}}
