@@ -136,7 +136,7 @@ class TransactionController extends Controller
         }
 
         // dd($products);
-        return view('admin.transaction.sale', compact('products'));
+        return view('admin.transaction.sale', compact('orders'));
     }
 
     public function saleShow($date)
