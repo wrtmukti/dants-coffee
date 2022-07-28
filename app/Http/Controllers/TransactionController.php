@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Order;
+use App\Models\Product;
 use App\Models\Transaction;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -120,6 +121,32 @@ class TransactionController extends Controller
     {
         $transaction = Transaction::findOrFail($id);
         return view('admin.transaction.show', compact('transaction'));
+    }
+
+    public function sale($id)
+    {
+        if ($id == 0) {
+            $products = Product::whereHas('orders')->get()->groupBy(function ($item) {
+                return $item->created_at->format('d-m-Y');
+            });;
+        } else {
+            $products = Product::whereHas('orders')->get()->groupBy(function ($item) {
+                return $item->created_at->format('m-Y');
+            });;
+        }
+
+        // dd($products);
+        return view('admin.transaction.sale', compact('products'));
+    }
+
+    public function saleShow($date)
+    {
+        if (strlen($date) > 7) {
+            $products = Product::whereHas('orders')->where(DB::raw("(DATE_FORMAT(created_at,'%d-%m-%Y'))"), '=', $date)->orderBy('created_at',  'desc')->get();
+        } else {
+            $products = Product::whereHas('orders')->where(DB::raw("(DATE_FORMAT(created_at,'%m-%Y'))"), '=', $date)->orderBy('created_at',  'desc')->get();
+        }
+        return view('admin.transaction.saleShow', compact('products', 'date'));
     }
 
     /**

@@ -15,6 +15,7 @@ Auth::routes();
 
 Route::prefix('admin')->middleware('auth')->group(function () {
     Route::get('/', [App\Http\Controllers\AdminController::class, 'index']);
+
     Route::get('/table', [App\Http\Controllers\AdminController::class, 'table']);
     Route::put('/table/{id}', [App\Http\Controllers\AdminController::class, 'updateTable']);
 
@@ -35,6 +36,8 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::get('/transaction/create', [App\Http\Controllers\TransactionController::class, 'create']);
     Route::post('/transaction', [App\Http\Controllers\TransactionController::class, 'store']);
     Route::get('/transaction/{id}', [App\Http\Controllers\TransactionController::class, 'show']);
+    Route::get('/transaction/report/{id}', [App\Http\Controllers\TransactionController::class, 'sale']);
+    Route::get('/transaction/report/sale/{date}', [App\Http\Controllers\TransactionController::class, 'saleShow']);
 
     Route::get('/product/food', [App\Http\Controllers\ProductController::class, 'food']);
     Route::get('/product/drink', [App\Http\Controllers\ProductController::class, 'drink']);
