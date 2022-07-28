@@ -126,27 +126,27 @@ class TransactionController extends Controller
     public function sale($id)
     {
         if ($id == 0) {
-            $orders = Order::all()->groupBy(function ($item) {
+            $products = Product::whereHas('orders')->get()->groupBy(function ($item) {
                 return $item->created_at->format('d-m-Y');
             });;
         } else {
-            $orders = Order::all()->groupBy(function ($item) {
+            $products = Product::whereHas('orders')->get()->groupBy(function ($item) {
                 return $item->created_at->format('m-Y');
             });;
         }
 
         // dd($products);
-        return view('admin.transaction.sale', compact('orders'));
+        return view('admin.transaction.sale', compact('products'));
     }
 
     public function saleShow($date)
     {
         if (strlen($date) > 7) {
-            $orders = Order::where(DB::raw("(DATE_FORMAT(created_at,'%d-%m-%Y'))"), '=', $date)->orderBy('created_at',  'desc')->get();
+            $products = Product::whereHas('orders')->where(DB::raw("(DATE_FORMAT(created_at,'%d-%m-%Y'))"), '=', $date)->orderBy('created_at',  'desc')->get();
         } else {
-            $orders = Order::where(DB::raw("(DATE_FORMAT(created_at,'%m-%Y'))"), '=', $date)->orderBy('created_at',  'desc')->get();
+            $products = Product::whereHas('orders')->where(DB::raw("(DATE_FORMAT(created_at,'%m-%Y'))"), '=', $date)->orderBy('created_at',  'desc')->get();
         }
-        return view('admin.transaction.saleShow', compact('orders', 'date'));
+        return view('admin.transaction.saleShow', compact('products', 'date'));
     }
 
     /**
