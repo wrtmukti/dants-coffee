@@ -129,6 +129,7 @@ class TransactionController extends Controller
             $products = Product::whereHas('orders')->get()->groupBy(function ($item) {
                 return $item->created_at->format('d-m-Y');
             });;
+            dd($products);
         } else {
             $products = Product::whereHas('orders')->get()->groupBy(function ($item) {
                 return $item->created_at->format('m-Y');
