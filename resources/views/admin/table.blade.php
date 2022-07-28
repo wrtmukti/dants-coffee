@@ -18,10 +18,10 @@
             <tbody>
               @foreach ($tables as  $data)
                 <tr>
-                  <td>
+                  <td class="text-center">
                     <h5 class="fw-bold">{{ $data->no_table }}</h5>
                   </td>
-                  <td>
+                  <td class="text-center">
                     <form action="/admin/table/{{$data->id}}" method="POST" style="text-decoration: none">
                       @csrf
                       @method('PUT')

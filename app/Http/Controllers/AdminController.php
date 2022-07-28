@@ -30,6 +30,6 @@ class AdminController extends Controller
             $table = Table::where('id', $id)->update(['status' => 0]);
         }
 
-        return view('admin.table', compact('table'));
+        return redirect()->to('/admin/table');
     }
 }

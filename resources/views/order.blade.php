@@ -1,6 +1,17 @@
 @extends('layouts.layout')
 
 @section('content')
+
+@if (session('success'))
+  <div class="alert alert-success text-center">
+    <p class="fw-bold">{{ session('success') }}</p>
+  </div>
+  @endif
+  @if (session('danger'))
+  <div class="alert alert-danger text-center">
+    <p class="fw-bold">{{ session('danger') }}</p>
+  </div>
+  @endif
 <div class="row mt-3">
   <div class="col-12">
       <div class="section-title">
