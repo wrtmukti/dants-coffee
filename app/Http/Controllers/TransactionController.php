@@ -127,11 +127,11 @@ class TransactionController extends Controller
     {
         if ($id == 0) {
             $products = Product::whereHas('orders')->get()->groupBy(function ($item) {
-                return $item->created_at->format('d-m-Y');
+                return $item->orders->created_at->format('d-m-Y');
             });;
         } else {
             $products = Product::whereHas('orders')->get()->groupBy(function ($item) {
-                return $item->created_at->format('m-Y');
+                return $item->orders->created_at->format('m-Y');
             });;
         }
 
