@@ -13,13 +13,9 @@ class ReportController extends Controller
     public function sale($id)
     {
         if ($id == 0) {
-            $products = Product::whereHas('orders')->get()->groupBy(function ($item) {
-                return $item->created_at->format('d-m-Y');
-            });;
+            $products = Product::whereHas('orders')->get()->groupBy(DB::raw('Date(created_at)'));
         } else {
-            $products = Product::whereHas('orders')->get()->groupBy(function ($item) {
-                return $item->created_at->format('m-Y');
-            });;
+            $products = Product::whereHas('orders')->get()->groupBy(DB::raw('MONTH(created_at)'));
         }
 
         // dd($products);
