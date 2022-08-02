@@ -13,9 +13,9 @@ class ReportController extends Controller
     public function sale($id)
     {
         if ($id == 0) {
-            $products = Product::with('orders')->get()->groupBy(DB::raw('DATE(orders.created_at)'));
+            $products = Order::with('products')->get()->groupBy(DB::raw('DATE(created_at)'));
         } else {
-            $products = Product::with('orders')->get()->groupBy(DB::raw('MONTH(orders.created_at)'));
+            $products = Order::with('products')->get()->groupBy(DB::raw('MONTH(created_at)'));
         }
 
         // dd($products);
