@@ -40,7 +40,7 @@
                   </tr>
                 </thead>
                 <tbody>
-                  @foreach($products->products as $data)
+                  @foreach($products as $data)
                   
                   <tr>
                     {{-- <td class="text-center fw-bold "><a href="/admin/order/{{ $data->id }}" class="nav-link text-dark">{{ $loop->iteration }}</a></td> --}}
@@ -49,7 +49,7 @@
                     </td>
                     <td class="text-center">
                      <?php $quantity = 0  ?>
-                     @foreach ($data as $item)
+                     @foreach ($data->orders as $item)
                          <?php $quantity += $item->pivot->quantity ?> 
                      @endforeach
                       <a   class="nav-link  text-dark">{{ $quantity }} item Terjual</a>
