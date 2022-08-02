@@ -29,11 +29,11 @@ class ReportController extends Controller
     public function saleShow($date)
     {
         if (strlen($date) > 7) {
-            $products = Product::join('orders')->where(DB::raw("(DATE_FORMAT(orders.created_at,'%d-%m-%Y'))"), '=', $date)->orderBy('created_at',  'desc')->get();
+            $orders = Order::with('products')->where(DB::raw("(DATE_FORMAT(created_at,'%d-%m-%Y'))"), '=', $date)->orderBy('created_at',  'desc')->firs();
         } else {
-            $products = Product::join('orders')->where(DB::raw("(DATE_FORMAT(orders.created_at,'%m-%Y'))"), '=', $date)->orderBy('created_at',  'desc')->get();
+            $orders = Order::with('products')->where(DB::raw("(DATE_FORMAT(created_at,'%m-%Y'))"), '=', $date)->orderBy('created_at',  'desc')->firs();
         }
-        return view('admin.operator.report.saleShow', compact('products', 'date'));
+        return view('admin.operator.report.saleShow', compact('orders', 'date'));
     }
 
     public function customer()
