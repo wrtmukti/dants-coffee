@@ -61,8 +61,12 @@
                       <a href="/admin/operator/report/sale/{{ $date }}" class="nav-link  text-dark">{{ $date }}</a>
                     </td>
                     <td class="text-center">
-                     
-                      <a  href="/admin/operator/report/sale/{{ $date }}" class="nav-link  text-dark">{{ $data->count() }} Produk Terjual</a>
+                      <?php $total=0; ?>
+                      @foreach ($data as $item)
+                          <?php $product = $item->products->count(); ?>
+                          <?php $total += $product; ?>
+                      @endforeach
+                      <a  href="/admin/operator/report/sale/{{ $date }}" class="nav-link  text-dark">{{ $total }} Produk Terjual</a>
                     </td>
                   </tr>
                   @endforeach
