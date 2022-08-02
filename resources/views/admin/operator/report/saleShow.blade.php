@@ -49,7 +49,7 @@
                     </td>
                     <td class="text-center">
                      <?php $quantity = 0  ?>
-                     @foreach ($data->orders as $item)
+                     @foreach ($data->products as $item)
                          <?php $quantity += $item->pivot->quantity ?> 
                      @endforeach
                       <a   class="nav-link  text-dark">{{ $quantity }} item Terjual</a>
