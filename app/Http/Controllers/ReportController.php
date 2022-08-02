@@ -13,9 +13,13 @@ class ReportController extends Controller
     public function sale($id)
     {
         if ($id == 0) {
-            $products = Order::with('products')->get()->groupBy(DB::raw('DATE(created_at)'));
+            $products = Order::with('products')->get()->groupBy(function ($item) {
+                return $item->created_at->format('d-m-Y');
+            });;
         } else {
-            $products = Order::with('products')->get()->groupBy(DB::raw('MONTH(created_at)'));
+            $products = Order::with('products')->get()->groupBy(function ($item) {
+                return $item->created_at->format('m-Y');
+            });;
         }
 
         // dd($products);
