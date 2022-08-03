@@ -48,8 +48,12 @@
                       <a  class="nav-link  text-dark">{{ $data->name }}</a>
                     </td>
                     <td class="text-center">
-                     <?php $quantity = 0  ?>
-                     @foreach ($data->orders->whereRelation('orders', DB::raw("(DATE_FORMAT(created_at,'%m-%Y'))"), '=', $date) as $item)
+                     @php
+                        $quantity = 0
+                         $product_id = $data->id;
+                         $product = App\Models\Product::with('orders')->where('id', $product_id)->whereRelation('orders', DB::raw("(DATE_FORMAT(created_at,'%m-%Y'))"), '=', $date)->orderBy('created_at',  'desc')->get();
+                     @endphp
+                     @foreach ($product as $item)
                          <?php $quantity += $item->pivot->quantity ?> 
                      @endforeach
                       <a   class="nav-link  text-dark">{{ $quantity }} item Terjual</a>
