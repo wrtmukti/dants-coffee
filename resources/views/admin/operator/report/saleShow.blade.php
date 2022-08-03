@@ -21,7 +21,7 @@
 
 
 
-  @if ($orders->products->count() == 0)
+  @if ($products->count() == 0)
     <div class="alert alert-danger text-center">
       Laporan Masih Kosong
     </div>
@@ -40,7 +40,7 @@
                   </tr>
                 </thead>
                 <tbody>
-                  @foreach($orders->products as $data)
+                  @foreach($products as $data)
                   
                   <tr>
                     {{-- <td class="text-center fw-bold "><a href="/admin/order/{{ $data->id }}" class="nav-link text-dark">{{ $loop->iteration }}</a></td> --}}
