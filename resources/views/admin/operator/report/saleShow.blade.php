@@ -49,13 +49,12 @@
                     </td>
                     <td class="text-center">
                      @php
-                         $quantity = 0;
+                         
                          $product_id = $data->id;
                          $product = App\Models\Product::with('orders')->where('id', $product_id)->whereRelation('orders', DB::raw("(DATE_FORMAT(created_at,'%d-%m-%Y'))"), '=', $date)->get();
                      @endphp
-                     @foreach ($product as $item)
-                         <?php $quantity += $item->pivot->quantity ?> 
-                     @endforeach
+                     <?php $quantity = 0; ?>
+                     
                       <a   class="nav-link  text-dark">{{ $quantity }} item Terjual</a>
                     </td>
                   </tr>
