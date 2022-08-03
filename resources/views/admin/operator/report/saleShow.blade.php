@@ -51,7 +51,7 @@
                      @php
                          $quantity = 0;
                          $product_id = $data->id;
-                         $product = App\Models\Product::with('orders')->where('id', $product_id)->whereRelation('orders', DB::raw("(DATE_FORMAT(created_at,'%m-%Y'))"), '=', $date)->get();
+                         $product = App\Models\Product::with('orders')->where('id', $product_id)->whereRelation('orders', DB::raw("(DATE_FORMAT(created_at,'%d-%m-%Y'))"), '=', $date)->get();
                          dd($product);
                      @endphp
                      @foreach ($product as $item)
