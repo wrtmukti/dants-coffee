@@ -49,7 +49,7 @@
                     </td>
                     <td class="text-center">
                      @php
-                        $quantity = 0
+                        $quantity = 0;
                          $product_id = $data->id;
                          $product = App\Models\Product::with('orders')->where('id', $product_id)->whereRelation('orders', DB::raw("(DATE_FORMAT(created_at,'%m-%Y'))"), '=', $date)->orderBy('created_at',  'desc')->get();
                      @endphp
