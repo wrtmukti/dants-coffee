@@ -56,7 +56,18 @@
                     @else
                         <td class="text-center fw-bold "><a href="/admin/transaction/{{ $data->id }}" class="nav-link text-warning ">waiting</a></td> 
                     @endif
-                    
+                    @if (Auth::user()->role == 1)
+                    <td>
+                      <form action="/admin/transaction/delete/{{$data->id}}" method="post" style="text-decoration: none">
+                        @csrf
+                        @method('DELETE')
+                        <input type="hidden" name="{{$data->id}}" value="DELETE">
+                        <button type="sumbit" class="btn btn-danger text-center " onclick="return confirm('Yakin ingin menghapus transaksi?');">
+                          Hapus</i>
+                        </button>
+                      </form> 
+                    </td>
+                    @endif
                   </tr>
                   @endforeach
                 </tbody>

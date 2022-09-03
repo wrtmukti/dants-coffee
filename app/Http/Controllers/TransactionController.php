@@ -178,8 +178,9 @@ class TransactionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function operatorDestroy($id)
     {
-        //
+        Transaction::destroy($id);
+        return redirect()->to('/admin/transaction')->with('danger', 'transaksi dihapus:(');
     }
 }

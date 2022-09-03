@@ -38,6 +38,8 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::get('/transaction/{id}', [App\Http\Controllers\TransactionController::class, 'show']);
     Route::get('/transaction/report/{id}', [App\Http\Controllers\TransactionController::class, 'sale']);
     Route::get('/transaction/report/sale/{date}', [App\Http\Controllers\TransactionController::class, 'saleShow']);
+    Route::delete('/transaction/delete/{id}', [App\Http\Controllers\TransactionController::class, 'operatorDestroy']);
+
 
     Route::get('/product/food', [App\Http\Controllers\ProductController::class, 'food']);
     Route::get('/product/drink', [App\Http\Controllers\ProductController::class, 'drink']);
