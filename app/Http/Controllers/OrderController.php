@@ -142,6 +142,6 @@ class OrderController extends Controller
     public function operatorDestroy($id)
     {
         Order::destroy($id);
-        return redirect()->to('/admin/order/online')->with('danger', 'transaksi dihapus:(');
+        return redirect()->to('/admin/order/online')->with('danger', 'order dihapus:(');
     }
 }
