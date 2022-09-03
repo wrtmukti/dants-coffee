@@ -162,9 +162,11 @@
             @csrf
             @method('DELETE')
             <input type="hidden" name="{{$data->id}}" value="DELETE">
-            <button type="sumbit" class="btn btn-danger text-center " onclick="return confirm('Yakin ingin menghapus order?');">
-              Hapus</i>
-            </button>
+            <div class="row">
+              <button type="sumbit" class="btn btn-danger nav-link rounded-pill p-2" onclick="return confirm('Yakin ingin menghapus order?');">
+                Hapus pesanan</i>
+              </button>
+            </div>
           </form> 
         </div>
         @endif
