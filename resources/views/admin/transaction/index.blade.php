@@ -37,6 +37,7 @@
                     {{-- <th class="text-center" style="width: 60%;"><h5 class=" fw-bold">No</h5></th> --}}
                     <th class="text-center" style="width: 40%;"><h5 class=" fw-bold">Tanggal</h5></th>
                     <th class="text-center"><h5 class=" fw-bold">Transaksi</h5></th>
+                    <th class="text-center"><h5 class=" fw-bold">Aksi</h5></th>
                   </tr>
                 </thead>
                 <tbody>

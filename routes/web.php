@@ -26,6 +26,8 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::get('/order/create', [App\Http\Controllers\OrderController::class, 'create']);
     Route::post('/order', [App\Http\Controllers\OrderController::class, 'store']);
     Route::patch('/order/{id}', [App\Http\Controllers\OrderController::class, 'update']);
+    Route::delete('/order/delete/{id}', [App\Http\Controllers\OrderController::class, 'operatorDestroy']);
+
 
     Route::get('/transaction', [App\Http\Controllers\TransactionController::class, 'index']);
     Route::post('/transaction/payment', [App\Http\Controllers\TransactionController::class, 'payment']);

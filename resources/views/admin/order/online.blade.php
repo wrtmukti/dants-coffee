@@ -13,6 +13,7 @@
               <tr>
                 <th class="text-center"><h5 class=" fw-bold">ORDER</h5></th>
                 <th class="text-center"><h5 class=" fw-bold">STATUS</h5></th>
+                <th class="text-center"><h5 class=" fw-bold">AKSI</h5></th>
               </tr>
             </thead>
             <tbody>
@@ -57,7 +58,18 @@
                     @endswitch
                   
                   
-                  {{-- <td class="text-danger"> 28.76% <i class="ti-arrow-down"></i></td> --}}
+                    @if (Auth::user()->role == 1)
+                    <td>
+                      <form action="/admin/order/delete/{{$data->id}}" method="post" style="text-decoration: none">
+                        @csrf
+                        @method('DELETE')
+                        <input type="hidden" name="{{$data->id}}" value="DELETE">
+                        <button type="sumbit" class="btn btn-danger text-center " onclick="return confirm('Yakin ingin menghapus order?');">
+                          Hapus</i>
+                        </button>
+                      </form> 
+                    </td>
+                    @endif
                 </tr>
               @endforeach
             </tbody>
