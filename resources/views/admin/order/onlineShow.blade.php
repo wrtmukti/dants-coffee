@@ -158,12 +158,12 @@
         @endswitch
         @if (Auth::user()->role == 1)
         <div class="row mt-2 justify-content-end">
-          <form action="/admin/order/delete/{{$data->id}}" method="post" style="text-decoration: none">
+          <form action="/admin/order/delete/{{$order->id}}" method="post" style="text-decoration: none">
             @csrf
             @method('DELETE')
-            <input type="hidden" name="{{$data->id}}" value="DELETE">
+            <input type="hidden" name="{{$order->id}}" value="DELETE">
             <div class="row">
-              <button type="sumbit" class="btn btn-danger nav-link rounded-pill p-2" onclick="return confirm('Yakin ingin menghapus order?');">
+              <button type="sumbit" class="btn btn-secondary nav-link rounded-pill p-2" onclick="return confirm('Yakin ingin menghapus order?');">
                 Hapus pesanan</i>
               </button>
             </div>
