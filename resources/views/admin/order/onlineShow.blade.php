@@ -157,7 +157,7 @@
               
         @endswitch
         @if (Auth::user()->role == 1)
-        <div class="row mt-2 justify-content-center">
+        <div class="row mt-2 justify-content-end">
           <form action="/admin/order/delete/{{$data->id}}" method="post" style="text-decoration: none">
             @csrf
             @method('DELETE')
