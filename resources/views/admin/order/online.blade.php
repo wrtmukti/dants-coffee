@@ -58,18 +58,7 @@
                     @endswitch
                   
                   
-                    @if (Auth::user()->role == 1)
-                    <td>
-                      <form action="/admin/order/delete/{{$data->id}}" method="post" style="text-decoration: none">
-                        @csrf
-                        @method('DELETE')
-                        <input type="hidden" name="{{$data->id}}" value="DELETE">
-                        <button type="sumbit" class="btn btn-danger text-center " onclick="return confirm('Yakin ingin menghapus order?');">
-                          Hapus</i>
-                        </button>
-                      </form> 
-                    </td>
-                    @endif
+                   
                 </tr>
               @endforeach
             </tbody>
