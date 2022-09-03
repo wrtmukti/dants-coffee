@@ -13,7 +13,6 @@
               <tr>
                 <th class="text-center"><h5 class=" fw-bold">ORDER</h5></th>
                 <th class="text-center"><h5 class=" fw-bold">STATUS</h5></th>
-                <th class="text-center"><h5 class=" fw-bold">AKSI</h5></th>
               </tr>
             </thead>
             <tbody>
