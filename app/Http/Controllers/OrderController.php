@@ -14,41 +14,75 @@ use Illuminate\Support\Facades\DB;
 class OrderController extends Controller
 {
 
-    public function online()
+    public function dinein()
     {
-        $orders = Order::where('customer_id', '>', 0)->orderBy('created_at', 'desc')->where('status', '!=', 4)->get()->groupBy('customer_id');
-        return view('admin.order.online', compact('orders'));
+        $orders = Order::where('type', 0)->where('customer_id', '>', 0)->orderBy('created_at', 'desc')->where('status', '!=', 4)->get()->groupBy('customer_id');
+        return view('admin.order.dinein', compact('orders'));
     }
-    public function manual()
+    public function takeaway()
     {
-        $orders = Order::where('customer_id', null)->orderBy('created_at', 'desc')->get();
-        return view('admin.order.manual', compact('orders'));
+        $orders = Order::where('type', 1)->where('customer_id', '>', 0)->orderBy('created_at', 'desc')->where('status', '!=', 4)->get()->groupBy('customer_id');
+        return view('admin.order.takeaway', compact('orders'));
+    }
+    public function reservation()
+    {
+        $orders = Order::where('type', 2)->where('customer_id', '>', 0)->orderBy('created_at', 'desc')->where('status', '!=', 4)->get()->groupBy('customer_id');
+        return view('admin.order.reservation', compact('orders'));
+    }
+    public function ttakeaway()
+    {
+        $orders = Order::where('type', 1)->orderBy('created_at', 'desc')->get();
+        return view('admin.order.takeaway', compact('orders'));
     }
 
-    public function onlineShow($id)
+    public function dineinShow($id)
     {
         $orders = Order::where('customer_id', $id)->where('status', '!=', 4)->get();
         $customer = Customer::where('id', $id)->first();
         if ($orders->where('status', 3)->count() < 1) {
-            return view('admin.order.onlineShow', compact('orders', 'customer'));
+            return view('admin.order.dineinShow', compact('orders', 'customer'));
         } else {
             $transaction = Order::where('customer_id', $id)->where('status', 3)->first();
             $transaction_id = $transaction->transaction_id;
-            return view('admin.order.onlineShow', compact('orders', 'customer', 'transaction_id'));
+            return view('admin.order.dineinShow', compact('orders', 'customer', 'transaction_id'));
+        }
+    }
+    public function takeawayShow($id)
+    {
+        $orders = Order::where('customer_id', $id)->where('status', '!=', 4)->get();
+        $customer = Customer::where('id', $id)->first();
+        if ($orders->where('status', 3)->count() < 1) {
+            return view('admin.order.takeawayShow', compact('orders', 'customer'));
+        } else {
+            $transaction = Order::where('customer_id', $id)->where('status', 3)->first();
+            $transaction_id = $transaction->transaction_id;
+            return view('admin.order.takeawayShow', compact('orders', 'customer', 'transaction_id'));
+        }
+    }
+    public function reservationShow($id)
+    {
+        $orders = Order::where('customer_id', $id)->where('status', '!=', 4)->get();
+        $customer = Customer::where('id', $id)->first();
+        if ($orders->where('status', 3)->count() < 1) {
+            return view('admin.order.reservationShow', compact('orders', 'customer'));
+        } else {
+            $transaction = Order::where('customer_id', $id)->where('status', 3)->first();
+            $transaction_id = $transaction->transaction_id;
+            return view('admin.order.reservationShow', compact('orders', 'customer', 'transaction_id'));
         }
     }
 
-    public function manualShow($id)
+    public function ttakeawayShow($id)
     {
         $order = Order::where('id', $id)->first();
 
-        return view('admin.order.manualShow', compact('order'));
+        return view('admin.order.takeawayShow', compact('order'));
     }
 
     public function create()
     {
         $categories = Category::orderBy('category_name', 'asc')->get();
-        $products = Product::with('stocks')->orderBy('name', 'desc')->get();
+        $products = Product::orderBy('name', 'desc')->get();
         return view('admin.order.create', compact('products', 'categories'));
     }
     public function store(Request $request)
@@ -67,9 +101,9 @@ class OrderController extends Controller
                 if ($products[$i] != '') {
                     $product_id = $products[$i];
                     $amount = $amounts[$i];
-                    $stocks = Stock::wherehas('products', function ($query) use ($product_id) {
+                    $product = Product::wherehas('orders', function ($query) use ($product_id) {
                         $query->where('id', $product_id);
-                    })->update(['amount' => DB::raw('amount - ' . $amount)]);
+                    })->update(['stock' => DB::raw('stock - ' . $amount)]);
                 }
             }
         }
@@ -92,11 +126,15 @@ class OrderController extends Controller
                 $amounts = $request->input('amount', []);
                 for ($i = 0; $i < count($products); $i++) {
                     if ($products[$i] != '') {
-                        $product_id = $products[$i];
-                        $amount = $amounts[$i];
-                        $stocks = Stock::wherehas('products', function ($query) use ($product_id) {
-                            $query->where('id', $product_id);
-                        })->update(['amount' => DB::raw('amount - ' . $amount)]);
+                        // $product_id = $products[$i];
+                        // $amount = $amounts[$i];
+                        // $product = Product::wherehas('orders', function ($query) use ($product_id) {
+                        //     $query->where('id', $product_id);
+                        // })->update(['stock' => DB::raw('stock - ' . $amount)]);
+                        $product = Product::where('id', $products[$i]);
+                        $product->update([
+                            'stock' => DB::raw('stock - ' . $amounts[$i])
+                        ]);
                     }
                 }
                 $order = Order::findOrFail($id);
@@ -131,11 +169,22 @@ class OrderController extends Controller
             return redirect()->to('/admin');
         }
         $order = Order::findOrFail($id);
-        if ($order->customer_id === null) {
-            return redirect()->to('admin/order/manual/' . $id);
-        } else {
-            return redirect()->to('admin/order/online/' . $order->customer_id);
+        switch ($order->type) {
+            case 0:
+                return redirect()->to('admin/order/dinein/' . $order->customer_id);
+                break;
+            case 1:
+                return redirect()->to('admin/order/takeaway/' . $order->customer_id);
+                break;
+            case 2:
+                return redirect()->to('admin/order/reservation/' . $order->customer_id);
+                break;
         }
+        // if ($order->customer_id === null) {
+        //     return redirect()->to('admin/order/takeaway/' . $id);
+        // } else {
+        //     return redirect()->to('admin/order/dinein/' . $order->customer_id);
+        // }
     }
 
 

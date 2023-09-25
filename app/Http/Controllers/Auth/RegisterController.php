@@ -57,7 +57,7 @@ class RegisterController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('operator');
+        $this->middleware('guest');
     }
 
     /**

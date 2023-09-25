@@ -1,5 +1,6 @@
 @extends('admin.layouts.layout')
 @section('content')
+{{-- {{ dd($products) }} --}}
 <div class="row">
   @if (session('success'))
   <div class="alert alert-success text-center">
@@ -49,12 +50,10 @@
                     </td>
                     <td class="text-center">
                      @php
-                         
-                         $product_id = $data->id;
-                         $product = App\Models\Product::with('orders')->where('id', $product_id)->whereRelation('orders', DB::raw("(DATE_FORMAT(created_at,'%d-%m-%Y'))"), '=', $date)->get();
+                         $product = App\Models\Product::where('id', $data->id)->whereRelation('orders', DB::raw("(DATE_FORMAT(created_at,'%d-%m-%Y'))"), '=', $date)->get();
                      @endphp
                      <?php $quantity = 0; ?>
-                     @foreach ($product as $item)
+                     @foreach ($products->orders as $item)
                          <?php $quantity += $item->pivot->quantity ?> 
                      @endforeach
                       <a   class="nav-link  text-dark">{{ $quantity }} item Terjual</a>

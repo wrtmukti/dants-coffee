@@ -28,17 +28,23 @@ class ReportController extends Controller
 
     public function saleShow($date)
     {
+        // if (strlen($date) > 7) {
+        //     $products = Product::with('orders')->whereRelation('orders', DB::raw("(DATE_FORMAT(created_at,'%d-%m-%Y'))"), '=', $date)->orderBy('created_at',  'desc')->get();
+        // } else {
+        //     $products = Product::with('orders')->whereRelation('orders', DB::raw("(DATE_FORMAT(created_at,'%m-%Y'))"), '=', $date)->orderBy('created_at',  'desc')->get();
+        // }
+        // return view('admin.operator.report.saleShow', compact('products', 'date'));
         if (strlen($date) > 7) {
-            $products = Product::with('orders')->whereRelation('orders', DB::raw("(DATE_FORMAT(created_at,'%d-%m-%Y'))"), '=', $date)->orderBy('created_at',  'desc')->get();
+            $products = Product::whereRelation('orders', DB::raw("(DATE_FORMAT(created_at,'%d-%m-%Y'))"), '=', $date)->orderBy('created_at',  'desc')->get();
         } else {
-            $products = Product::with('orders')->whereRelation('orders', DB::raw("(DATE_FORMAT(created_at,'%m-%Y'))"), '=', $date)->orderBy('created_at',  'desc')->get();
+            $products = Product::whereRelation('orders', DB::raw("(DATE_FORMAT(created_at,'%m-%Y'))"), '=', $date)->orderBy('created_at',  'desc')->get();
         }
         return view('admin.operator.report.saleShow', compact('products', 'date'));
     }
 
     public function customer()
     {
-        $customers = Customer::where('whatsapp', '!=', null)->orderBy('created_at', 'desc')->get();
+        $customers = Customer::with('orders')->where('name', '!=', null)->get();
         return view('admin.operator.report.customer', compact('customers'));
     }
 }

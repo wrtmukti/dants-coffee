@@ -67,20 +67,30 @@
                     
                 <tr>
                   <td>
-                    @if ($data->status == 0)
-                    <a href="/admin/order/online/{{ $data->id }}" class="nav-link text-center text-dark">Pesanan Online</a>
-                    @else
-                    <a href="/admin/order/manual/{{ $data->id }}" class="nav-link text-center text-dark">Pesanan Manual</a>
-                        
-                    @endif                  
+                    @switch($data->type)
+                        @case(0)
+                            <a href="/admin/order/dinein/{{ $data->customer_id }}" class="nav-link text-center text-dark">Pesanan Dine in</a>
+                            @break
+                        @case(1)
+                            <a href="/admin/order/takeaway/{{ $data->customer_id }}" class="nav-link text-center text-dark">Pesanan Takeaway</a>
+                            @break
+                        @case(2)
+                            <a href="/admin/order/reservation/{{ $data->customer_id }}" class="nav-link text-center text-dark">Pesanan Reservasi</a>
+                            @break
+                    @endswitch
                   </td>
                   <td>
-                    @if ($data->status == 0)
-                    <a href="/admin/order/online/{{ $data->id }}" class="nav-link text-center text-dark">Rp. {{ $data->price }},-</a>
-                    @else
-                    <a href="/admin/order/manual/{{ $data->id }}" class="nav-link text-center text-dark">Rp. {{ $data->price }},-</a>
-                        
-                    @endif
+                    @switch($data->type)
+                        @case(0)
+                            <a href="/admin/order/dinein/{{ $data->customer_id }}" class="nav-link text-center text-dark">Rp {{ $data->price }},-</a>
+                            @break
+                        @case(1)
+                            <a href="/admin/order/takeaway/{{ $data->customer_id }}" class="nav-link text-center text-dark">Rp {{ $data->price }},-</a>
+                            @break
+                        @case(2)
+                            <a href="/admin/order/reservation/{{ $data->customer_id }}" class="nav-link text-center text-dark">Rp {{ $data->price }},-</a>
+                            @break
+                    @endswitch
                   </td>
                 </tr>
                 @endforeach

@@ -11,6 +11,5 @@ class Table extends Model
     protected $fillable = [
         'no_table',
         'status',
-
     ];
 }

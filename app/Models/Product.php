@@ -15,14 +15,15 @@ class Product extends Model
         'image',
         'price',
         'status',
+        'stock',
         'type',
         'category_id',
     ];
 
-    public function stocks()
-    {
-        return $this->belongsToMany(Stock::class);
-    }
+    // public function stocks()
+    // {
+    //     return $this->belongsToMany(Stock::class);
+    // }
     public function category()
     {
         return $this->belongsTo(Category::class);

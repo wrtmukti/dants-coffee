@@ -26,13 +26,14 @@
   Belum ada pesanan
 </div>
 @else
-  <div class="row justify-content-center my-3">
-    <div class="col-md-12">
+  <div class="row justify-content-center my-3 mb-5">
+    <div class="col-md-8">
       <div class="card shadow p-lg-2">
         <div class="table-responsive">
           <table class="table table-hover">
             <div class="thead">
               <tr>
+                <th class="text-center" style="width: 20%">Pemesan</th>
                 <th class="text-center" style="width: 20%">Meja</th>
                 <th class="text-center">Status Pesanan</th>
               </tr>
@@ -40,7 +41,13 @@
             <tbody>
               @foreach ($orders as $data)
               <tr>
-                <td class="text-center" style="font-size: 12px">{{ $data->customer->no_table }}</td>
+                <td class="text-center" style="font-size: 12px">{{ $data->customer->name }}</td>
+                @if ($data->type == 0)
+                  <td class="text-center" style="font-size: 12px">{{ $data->customer->no_table }}</td>
+                @endif
+                @if ($data->type == 1)
+                  <td class="text-center" style="font-size: 12px">Takeaway</td>
+                @endif
                 <td class="text-center">
                 @switch($type = $data->status)
                     @case(0)

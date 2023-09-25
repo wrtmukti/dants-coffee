@@ -17,14 +17,14 @@ class ProductController extends Controller
     public function food()
     {
         $categories = Category::where('category_type', 0)->orderBy('category_name', 'asc')->get();
-        $products = Product::with('stocks')->orderBy('created_at', 'desc')->where('type', 0)->get();
+        $products = Product::orderBy('created_at', 'desc')->where('type', 0)->get();
 
         return view('admin.product.food', compact('categories', 'products'));
     }
     public function drink()
     {
         $categories = Category::where('category_type', 1)->orderBy('category_name', 'asc')->get();
-        $products = Product::with('stocks')->orderBy('name', 'asc')->where('type', 1)->get();
+        $products = Product::orderBy('name', 'asc')->where('type', 1)->get();
 
         return view('admin.product.drink', compact('categories', 'products'));
     }
@@ -77,8 +77,8 @@ class ProductController extends Controller
         $category_type = $request->category_type;
         $category = Category::find($category_id);
         // dd($category);
-        $stocks = Stock::orderby('name', 'asc')->where('type', $category_type)->get();
-        return view('admin.product.create', compact('stocks', 'category', 'category_type'));
+        // $stocks = Stock::orderby('name', 'asc')->where('type', $category_type)->get();
+        return view('admin.product.create', compact('category', 'category_type'));
     }
 
 
@@ -90,6 +90,7 @@ class ProductController extends Controller
             'name' => 'required|string|max:255',
             'price' => 'required',
             'status' => 'required',
+            'stock' => 'required',
             'type' => 'required',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
@@ -102,7 +103,7 @@ class ProductController extends Controller
         }
 
         $product = Product::create($input);
-        $product->stocks()->attach($request->stock_id);
+        // $product->stocks()->attach($request->stock_id);
 
         if ($request->type == 0) {
             return redirect()->to('/admin/product/food')->with('success', 'Produk baru berhasil ditambahkan :)');
@@ -126,7 +127,12 @@ class ProductController extends Controller
 
     public function update(Request $request, $id)
     {
-        //
+        $product = Product::where('id', $id)->update([
+            'name' => $request->name,
+            'price' => $request->price,
+            'stock' => $request->stock,
+        ]);
+        return redirect()->back();
     }
 
 

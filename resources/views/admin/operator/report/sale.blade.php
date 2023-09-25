@@ -58,7 +58,7 @@
                   <tr>
                     {{-- <td class="text-center fw-bold "><a href="/admin/order/{{ $data->id }}" class="nav-link text-dark">{{ $loop->iteration }}</a></td> --}}
                     <td class="text-center">
-                      <a href="/admin/operator/report/sale/{{ $date }}" class="nav-link  text-dark">{{ $date }}</a>
+                      <a href="#" class="nav-link  text-dark">{{ $date }}</a>
                     </td>
                     <td class="text-center">
                       <?php $total=0; ?>
@@ -66,7 +66,7 @@
                           <?php $product = $item->products->count(); ?>
                           <?php $total += $product; ?>
                       @endforeach
-                      <a  href="/admin/operator/report/sale/{{ $date }}" class="nav-link  text-dark">{{ $total }} Produk Terjual</a>
+                      <a  href="#" class="nav-link  text-dark">{{ $total }} Produk Terjual</a>
                     </td>
                   </tr>
                   @endforeach

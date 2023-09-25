@@ -17,7 +17,8 @@ class CreateProductsTable extends Migration
             $table->bigIncrements('id');
             $table->string('sku');
             $table->string('name');
-            $table->string('image')->default('default.jpg');;
+            $table->string('image')->default('default.jpg');
+            $table->integer('stock');
             $table->integer('price');
             $table->integer('status');
             $table->integer('type');

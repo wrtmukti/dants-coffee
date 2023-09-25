@@ -38,24 +38,24 @@ class TransactionController extends Controller
                 'status' => 3,
                 'transaction_id' => $transaction->id,
             ]);
-            return redirect()->to('admin/order/manual/' . $request->order_id);
+            return redirect()->to('admin/order/takeaway/' . $request->order_id);
         } else {
             $orders = Order::where('customer_id', $request->customer_id)->where('status', 2)->update(['status' => 3, 'transaction_id' => $transaction->id]);
-            return redirect()->to('admin/order/online/' . $request->customer_id);
+            return redirect()->to('admin/order/dinein/' . $request->customer_id);
         }
     }
-    public function invoiceOnline($id)
+    public function invoice($id)
     {
         $transaction = Transaction::find($id);
         $orders = Order::with('products')->where('transaction_id', $id)->get();
-        return view('admin.transaction.invoiceOnline', compact('transaction', 'orders'));
+        return view('admin.transaction.invoice', compact('transaction', 'orders'));
     }
-    public function invoiceManual($id)
-    {
-        $transaction = Transaction::find($id);
-        $order = Order::with('products')->where('transaction_id', $id)->first();
-        return view('admin.transaction.invoiceManual', compact('transaction', 'order'));
-    }
+    // public function invoiceTakeaway($id)
+    // {
+    //     $transaction = Transaction::find($id);
+    //     $order = Order::with('products')->where('transaction_id', $id)->first();
+    //     return view('admin.transaction.invoiceTakeaway', compact('transaction', 'order'));
+    // }
     public function summary($id)
     {
 

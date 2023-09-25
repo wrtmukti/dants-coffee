@@ -5,7 +5,7 @@
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>Admin Kedai Papaji</title>
+  <title>Admin || Dant's Coffee</title>
 
 
   <!-- plugins:css -->
@@ -31,7 +31,7 @@
   <!-- inject:css -->
   <link rel="stylesheet" href="{{ asset('vendor/star-admin/template/css/vertical-layout-light/style.css') }}">
   <!-- endinject -->
-  <link rel="shortcut icon" href="{{ asset('images/website/nobglogo2.png') }}" />
+  <link rel="shortcut icon" href="{{ asset('images/Dants.png') }}" />
 </head>
 <body>
   
@@ -66,8 +66,8 @@
           </button>
         </div>
         <div>
-          <a class="navbar-brand" href="/admin">
-            <img src="{{ asset('images/website/nobglogo1.png') }}" alt="" width="150%">
+          <a class="" href="/admin">
+            <img src="{{ asset('images/Dants.png') }}" alt="" width="100%">
           </a>
         </div>
       </div>
@@ -109,15 +109,44 @@
                 <p class="mb-0 font-weight-medium float-left">{{ $orders->count() }} Pesanan Masuk </p>
               </a>
               @foreach ($orders as $data)
-              <a href="/admin/order/online/{{ $data->customer->id }}" class="dropdown-item preview-item py-3">
-                <div class="preview-thumbnail">
-                  <i class="mdi mdi-food m-auto text-primary"></i>
-                </div>
-                <div class="preview-item-content">
-                  <h6 class="preview-subject fw-normal text-dark mb-1">Pesanan meja {{ $data->customer->no_table }} masuk</h6>
-                  <p class="fw-light small-text mb-0"> {{ $data->created_at->diffForHumans(); }}</p>
-                </div>
-              </a>
+                  @switch($data->type)
+                      @case(0)
+                        <a href="/admin/order/dinein/{{ $data->customer->id }}" class="dropdown-item preview-item py-3">
+                          <div class="preview-thumbnail">
+                            <i class="mdi mdi-food m-auto text-primary"></i>
+                          </div>
+                          <div class="preview-item-content">
+                            <h6 class="preview-subject fw-normal text-dark mb-1">Pesanan meja {{ $data->customer->no_table }} pending</h6>
+                            <p class="fw-light small-text mb-0"> {{ $data->created_at->diffForHumans(); }}</p>
+                          </div>
+                        </a>
+                          @break
+                      @case(1)
+                          <a href="/admin/order/dinein/{{ $data->customer->id }}" class="dropdown-item preview-item py-3">
+                            <div class="preview-thumbnail">
+                              <i class="mdi mdi-food m-auto text-primary"></i>
+                            </div>
+                            <div class="preview-item-content">
+                              <h6 class="preview-subject fw-normal text-dark mb-1">Pesanan Takeaway pending</h6>
+                              <p class="fw-light small-text mb-0"> {{ $data->created_at->diffForHumans(); }}</p>
+                            </div>
+                          </a>
+                          @break
+                      @case(2)
+                          <a href="/admin/order/dinein/{{ $data->customer->id }}" class="dropdown-item preview-item py-3">
+                            <div class="preview-thumbnail">
+                              <i class="mdi mdi-food m-auto text-primary"></i>
+                            </div>
+                            <div class="preview-item-content">
+                              <h6 class="preview-subject fw-normal text-dark mb-1">Pesanan Reservasi pending</h6>
+                              <p class="fw-light small-text mb-0"> {{ $data->created_at->diffForHumans(); }}</p>
+                            </div>
+                          </a>
+                          @break
+                      @default
+                          
+                  @endswitch
+                  
               @endforeach
               
 
@@ -126,7 +155,7 @@
 
           <li class="nav-item dropdown d-none d-lg-block user-dropdown">
             <a class="nav-link" id="UserDropdown" href="#" data-bs-toggle="dropdown" aria-expanded="false">
-              <img class="img-xs rounded-circle" src="images/faces/face8.jpg" alt="Profile image"> </a>
+              <img class="img-xs rounded-circle" src="{{ asset('images/user/' . Auth::user()->image) }}" alt="Profile image"> </a>
             <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="UserDropdown">
               <div class="dropdown-header text-center">
                 <img class="img-md rounded-circle" src="{{ asset('images/user/' . Auth::user()->image) }}" alt="Profile image">
@@ -188,10 +217,10 @@
             </a>
             <div class="collapse" id="Pesanan">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="/admin/order/create">Buat Pesanan</a></li>
-                <li class="nav-item"> <a class="nav-link" href="/admin/order/manual">Pesanan Manual</a></li>
-                <li class="nav-item"> <a class="nav-link" href="/admin/order/online">Pesanan Online</a></li>
-                <li class="nav-item"> <a class="nav-link" href="/admin/table">Meja</a></li>
+                {{-- <li class="nav-item"> <a class="nav-link" href="/admin/order/create">Buat Pesanan</a></li> --}}
+                <li class="nav-item"> <a class="nav-link" href="/admin/order/dinein">Dine In</a></li>
+                {{-- <li class="nav-item"> <a class="nav-link" href="/admin/order/takeaway">Takeaway</a></li> --}}
+                <li class="nav-item"> <a class="nav-link" href="/admin/order/reservation">Reservasi</a></li>
               </ul>
             </div>
           </li>
@@ -211,7 +240,7 @@
               </ul>
             </div>
           </li>
-          <li class="nav-item nav-category">Stok dan Produk</li>
+          <li class="nav-item nav-category">Produk Dan Meja</li>
           <li class="nav-item">
             <a class="nav-link" data-bs-toggle="collapse" href="#form-elements" aria-expanded="false" aria-controls="form-elements">
               <i class="menu-icon mdi  mdi mdi-food "></i>
@@ -228,11 +257,12 @@
             </div>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/admin/stock/">
-              <i class="mdi  mdi mdi-folder-plus  menu-icon"></i>
-              <span class="menu-title">Stok</span>
+            <a class="nav-link" href="/admin/table">
+              <i class="mdi mdi-chair-school  menu-icon"></i>
+              <span class="menu-title">Meja</span>
             </a>
           </li>
+         
 
           {{-- OPERATOR --}}
           @if (Auth::user()->role == 1)

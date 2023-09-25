@@ -16,7 +16,7 @@
 
                             <div class="col-md-6">
                                 <select class="form-control" name="role" id="exampleFormControlSelect1">
-                                    <option value="0">Staff</option>
+                                    {{-- <option value="0">Staff</option> --}}
                                     <option value="1">Operator</option>
                                   </select>
 

@@ -13,7 +13,11 @@ class Customer extends Model
         'id',
         'name',
         'whatsapp',
+        'visitor',
+        'date',
         'no_table',
+        'start_time',
+        'finish_time',
     ];
 
     public function orders()

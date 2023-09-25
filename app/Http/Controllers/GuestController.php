@@ -34,23 +34,23 @@ class GuestController extends Controller
 
     public function status()
     {
-        $orders = Order::with('products')->orderBy('created_at', 'desc')->where('status', '!=', 3)->whereHas('customer')->get();
+        $orders = Order::with('products')->orderBy('created_at', 'desc')->where('type', '!=', 2)->where('status', '!=', 3)->whereHas('customer')->get();
         return view('order', compact('orders'));
     }
 
     public function category($id)
     {
         $category = Category::find($id);
-        $products = Product::with('stocks')->where('category_id', $id)->orderBy('price', 'asc')->get();
+        $products = Product::where('category_id', $id)->orderBy('name', 'asc')->get();
         return view('category', compact('products', 'category'));
     }
 
     public function store(Request $request)
     {
-        if ($request->no_table !== null) {
+        // dd($request);
+        if ($request->type == 0) {
             $table = Table::where('no_table', $request->no_table)->first();
             if ($table->status == 1) {
-
                 $customers = Customer::where('no_table', $request->no_table)->whereHas('orders', function ($query) {
                     $query->where('status', '<', '3');
                 })->first();
@@ -60,12 +60,8 @@ class GuestController extends Controller
                 } else {
                     $customer = new Customer();
                     $customer->no_table = $request->no_table;
-                    if ($request->has('customer_name')) {
-                        $customer->name = $request->customer_name;
-                    }
-                    if ($request->has('customer_whatsapp')) {
-                        $customer->whatsapp = $request->customer_whatsapp;
-                    }
+                    $customer->name = $request->name;
+                    $customer->no_table = $request->no_table;
                     $customer->save();
                     $customer_id = $customer->id;
                 }
@@ -89,8 +85,59 @@ class GuestController extends Controller
             } else {
                 return redirect()->to('/order/status')->with('danger', 'Meja kamu belum aktif, silahkan hubungi kasir!');
             }
-        } else {
-            return redirect()->to('/order/status')->with('danger', 'Maaf Kamu belum mengisi no meja');
+        }
+        if ($request->type == 1) {
+            $customer = new Customer();
+            $customer->no_table = $request->no_table;
+            $customer->name = $request->name;
+            $customer->save();
+            $customer_id = $customer->id;
+
+            $products = $request->input('product_id', []);
+            $amounts = $request->input('amount', []);
+
+            $order = Order::create([
+                'status' =>  $request->status,
+                'price' =>  $request->price,
+                'type' => $request->type,
+                'customer_id' => $customer_id,
+                'note' => $request->note,
+            ]);
+            $sync_data = [];
+            for ($i = 0; $i < count($products); $i++) {
+                $sync_data[$products[$i]] = ['quantity' => $amounts[$i]];
+                $order->products()->sync($sync_data);
+            };
+            return redirect()->to('/order/status')->with('success', 'Pesanan Kamu Berhasil Dikirim :)');
+        }
+        if ($request->type == 2) {
+            // dd($request);
+            $customer = new Customer();
+            $customer->name = $request->name;
+            $customer->whatsapp = $request->whatsapp;
+            $customer->visitor = $request->visitor;
+            $customer->date = $request->date;
+            $customer->start_time = $request->start_time;
+            $customer->finish_time = $request->finish_time;
+            $customer->save();
+            $customer_id = $customer->id;
+
+            $products = $request->input('product_id', []);
+            $amounts = $request->input('amount', []);
+
+            $order = Order::create([
+                'status' =>  $request->status,
+                'price' =>  $request->price,
+                'type' => $request->type,
+                'customer_id' => $customer_id,
+                'note' => $request->note,
+            ]);
+            $sync_data = [];
+            for ($i = 0; $i < count($products); $i++) {
+                $sync_data[$products[$i]] = ['quantity' => $amounts[$i]];
+                $order->products()->sync($sync_data);
+            };
+            return redirect()->to('/order/status')->with('success', 'Pesanan Kamu Berhasil Dikirim :)');
         }
     }
 

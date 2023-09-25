@@ -74,12 +74,13 @@
           <input type="file" name="image" class="form-control" placeholder="image">
         </div>
         <div class="form-group">
-          <label for="">Stok</label>
-          <select name="stock_id[]" class="selectpicker " multiple aria-label="size 3 select example" id="exampleFormControlSelect1">
-            @foreach ($stocks as $stock)
-              <option value="{{ $stock->id }}">{{ $stock->name }}</option>
-            @endforeach
-          </select>          
+          <label for="price">Stok</label>
+            <input id="stock" type="text" class="form-control @error('stock') is-invalid @enderror" name="stock" value="{{ old('stock') }}" required autocomplete="stock" autofocus>
+            @error('stock')
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+            @enderror        
         </div>
         
         <button type="submit" class="btn btn-primary">Submit</button>

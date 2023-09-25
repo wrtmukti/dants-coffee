@@ -17,8 +17,10 @@ class CreateCustomersTable extends Migration
             $table->bigIncrements('id');
             $table->string('name')->nullable();
             $table->string('whatsapp')->nullable();
-            $table->integer('no_table');
-            $table->integer('point')->default(0);
+            $table->integer('no_table')->nullable();
+            $table->integer('visitor')->nullable();
+            $table->date('date')->nullable();
+            // $table->integer('point')->default(0);
             $table->timestamps();
         });
     }

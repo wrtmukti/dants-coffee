@@ -58,7 +58,7 @@
                         <td class="text-center fw-bold "><a href="/admin/transaction/{{ $data->id }}" class="nav-link text-warning ">waiting</a></td> 
                     @endif
                     @if (Auth::user()->role == 1)
-                    <td>
+                    <td class="text-center">
                       <form action="/admin/transaction/delete/{{$data->id}}" method="post" style="text-decoration: none">
                         @csrf
                         @method('DELETE')
